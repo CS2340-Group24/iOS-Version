@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Shelter Finder.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>40DADCB6203A2E5E002C8E4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40DADCCA203A2E5F002C8E4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40DADCD5203A2E5F002C8E4D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StartupViewController.swift
 //  Shelter Finder
 //
 //  Created by Berchenko, Amiel D on 2/18/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class StartupViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

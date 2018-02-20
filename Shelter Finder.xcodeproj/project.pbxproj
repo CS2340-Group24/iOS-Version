@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40CD4A9B203CBCD90017F7AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CD4A9A203CBCD90017F7AD /* LoginViewController.swift */; };
+		40CD4A9D203CBF350017F7AD /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CD4A9C203CBF350017F7AD /* LoggedInViewController.swift */; };
 		40DADCBB203A2E5E002C8E4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DADCBA203A2E5E002C8E4D /* AppDelegate.swift */; };
-		40DADCBD203A2E5E002C8E4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DADCBC203A2E5E002C8E4D /* ViewController.swift */; };
+		40DADCBD203A2E5E002C8E4D /* StartupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DADCBC203A2E5E002C8E4D /* StartupViewController.swift */; };
 		40DADCC0203A2E5E002C8E4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40DADCBE203A2E5E002C8E4D /* Main.storyboard */; };
 		40DADCC2203A2E5E002C8E4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40DADCC1203A2E5E002C8E4D /* Assets.xcassets */; };
 		40DADCC5203A2E5F002C8E4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40DADCC3203A2E5F002C8E4D /* LaunchScreen.storyboard */; };
@@ -34,9 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40CD4A9A203CBCD90017F7AD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		40CD4A9C203CBF350017F7AD /* LoggedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
 		40DADCB7203A2E5E002C8E4D /* Shelter Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelter Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40DADCBA203A2E5E002C8E4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		40DADCBC203A2E5E002C8E4D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		40DADCBC203A2E5E002C8E4D /* StartupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupViewController.swift; sourceTree = "<group>"; };
 		40DADCBF203A2E5E002C8E4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40DADCC1203A2E5E002C8E4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40DADCC4203A2E5F002C8E4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,8 +102,10 @@
 			isa = PBXGroup;
 			children = (
 				40DADCBA203A2E5E002C8E4D /* AppDelegate.swift */,
-				40DADCBC203A2E5E002C8E4D /* ViewController.swift */,
+				40DADCBC203A2E5E002C8E4D /* StartupViewController.swift */,
+				40CD4A9A203CBCD90017F7AD /* LoginViewController.swift */,
 				40DADCBE203A2E5E002C8E4D /* Main.storyboard */,
+				40CD4A9C203CBF350017F7AD /* LoggedInViewController.swift */,
 				40DADCC1203A2E5E002C8E4D /* Assets.xcassets */,
 				40DADCC3203A2E5F002C8E4D /* LaunchScreen.storyboard */,
 				40DADCC6203A2E5F002C8E4D /* Info.plist */,
@@ -259,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40DADCBD203A2E5E002C8E4D /* ViewController.swift in Sources */,
+				40CD4A9B203CBCD90017F7AD /* LoginViewController.swift in Sources */,
+				40DADCBD203A2E5E002C8E4D /* StartupViewController.swift in Sources */,
 				40DADCBB203A2E5E002C8E4D /* AppDelegate.swift in Sources */,
+				40CD4A9D203CBF350017F7AD /* LoggedInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +513,7 @@
 				40DADCE1203A2E5F002C8E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40DADCE2203A2E5F002C8E4D /* Build configuration list for PBXNativeTarget "Shelter FinderTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +522,7 @@
 				40DADCE4203A2E5F002C8E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40DADCE5203A2E5F002C8E4D /* Build configuration list for PBXNativeTarget "Shelter FinderUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +531,7 @@
 				40DADCE7203A2E5F002C8E4D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

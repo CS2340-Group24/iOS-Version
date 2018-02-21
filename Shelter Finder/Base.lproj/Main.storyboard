@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -94,12 +94,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Al6-Wi-BZA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820" y="123.68815592203899"/>
+            <point key="canvasLocation" x="788" y="124"/>
         </scene>
         <!--Logged In View Controller-->
         <scene sceneID="gjK-lX-pJg">
             <objects>
-                <viewController id="QBe-W1-Nsr" customClass="LoggedInViewController" customModule="Shelter_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoggedInView" id="QBe-W1-Nsr" customClass="LoggedInViewController" customModule="Shelter_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ypc-Ef-Vrq"/>
                         <viewControllerLayoutGuide type="bottom" id="4bi-81-N6Y"/>
@@ -126,6 +126,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fWE-Cf-I8e"/>
+        <segue reference="XUJ-gx-zyg"/>
     </inferredMetricsTieBreakers>
 </document>

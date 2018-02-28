@@ -26,6 +26,13 @@ class LoginViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func login(_ sender: UIButton) {
+        let username = usernameTextField.text!
+        if let user = UserList.getUser(username: username) {
+            if passwordTextField.text == user.password {
+                let next = self.storyboard?.instantiateViewController(withIdentifier: "LoggedInView") as! LoggedInViewController
+                self.present(next, animated: true, completion: nil)
+            }
+        }
         if usernameTextField.text == "admin" && passwordTextField.text == "admin" {
             let next = self.storyboard?.instantiateViewController(withIdentifier: "LoggedInView") as! LoggedInViewController
             self.present(next, animated: true, completion: nil)

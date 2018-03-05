@@ -60,6 +60,14 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
     }
     
+    func presentAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: Actions
     @IBAction func register(_ sender: UIButton) {
         let username = usernameField.text!
@@ -69,15 +77,27 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let lastName = lastNameField.text!
         let dateOfBirth = datePicker.date
         
-        if !UserList.contains(user: username) {
+        if username == "" || password1 == "" || password2 == "" || firstName == "" || lastName == "" {
+            presentAlert(title: "Not all fields filled", message: "Please fill out all the fields")
+        } else if !UserList.contains(user: username) {
             if password1 == password2 {
                 let newUser = User(username: username, password: password1, firstName: firstName
                     , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
                 UserList.addUser(user: newUser)
                 
-                let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
-                self.present(next, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Registration Successful", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                    let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
+                    self.present(next, animated: true, completion: nil)
+                }))
+                self.present(alert, animated: true, completion: nil)
+                
+            } else {
+                presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
             }
+        } else {
+            presentAlert(title: "Username already taken", message: "Please choose a different username")
         }
     }
     

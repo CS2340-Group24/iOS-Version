@@ -1,0 +1,6 @@
+framework module Pods_Shelter_Finder {
+  umbrella header "Pods-Shelter Finder-umbrella.h"
+
+  export *
+  module * { export * }
+}

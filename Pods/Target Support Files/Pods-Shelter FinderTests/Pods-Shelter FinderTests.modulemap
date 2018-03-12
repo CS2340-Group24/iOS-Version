@@ -1,0 +1,6 @@
+framework module Pods_Shelter_FinderTests {
+  umbrella header "Pods-Shelter FinderTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

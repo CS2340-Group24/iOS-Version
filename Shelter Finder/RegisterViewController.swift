@@ -79,11 +79,12 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         if username == "" || password1 == "" || password2 == "" || firstName == "" || lastName == "" {
             presentAlert(title: "Not all fields filled", message: "Please fill out all the fields")
-        } else if !UserList.contains(user: username) {
+        } else if !Model.contains(username: username) {
             if password1 == password2 {
-                let newUser = User(username: username, password: password1, firstName: firstName
+                //let newUser = User(username: username, password: password1, firstName: firstName
+                //    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
+                Model.createUser(username: username, password: password1, firstName: firstName
                     , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
-                UserList.addUser(user: newUser)
                 
                 let alert = UIAlertController(title: "Registration Successful", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in

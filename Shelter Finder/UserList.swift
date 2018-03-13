@@ -10,32 +10,36 @@ import Foundation
 
 class UserList {
     
-    private(set) static var userList: [User] = []
+    private(set) var userList: [User] = []
     
-    static func addUser(user: User) {
+    func addUser(user: User) {
         userList.append(user)
     }
     
-    static func removeUser(user: User) {
-        if let index = userList.index(where: {$0.username == user.username}) {
+    func removeUser(username: String) {
+        if let index = userList.index(where: {$0.username == username}) {
             userList.remove(at: index)
         }
     }
     
-    static func contains(user: User) -> Bool {
+    func contains(user: User) -> Bool {
         return userList.contains(where: {$0.username == user.username})
     }
     
-    static func contains(user: String) -> Bool {
+    func contains(user: String) -> Bool {
         return userList.contains(where: {$0.username == user})
     }
     
-    static func getUser(username: String) -> User? {
+    func getUser(username: String) -> User? {
         if let index = userList.index(where: {$0.username == username}) {
             return userList[index]
         } else {
             return nil
         }
+    }
+    
+    func numUsers() -> Int {
+        return userList.count
     }
     
 }

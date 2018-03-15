@@ -17,6 +17,36 @@ class DataLoader {
         ref = Database.database().reference()
     }
     
+    static func findUser(username: String, action: @escaping (User) -> Void) {
+        ref.child("Users").child(username).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let password = value?["Password"] as? String ?? ""
+            print("\"" + password + "\"")
+            if password != "" {
+                let firstName = value?["First Name"] as? String ?? ""
+                let lastName = value?["Last Name"] as? String ?? ""
+                let genderString = value?["Gender"] as? String ?? ""
+                let gender: Gender
+                if let currentGender = Gender(rawValue: genderString) {
+                    gender = currentGender
+                } else {
+                    gender = Gender.notSpecified
+                }
+                let dob = value?["Date of Birth"] as? String ?? ""
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy"
+                let dateOfBirth = dateFormatter.date(from: dob)!
+                let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
+                
+                action(user)
+            }
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
     static func loadUsers() {
         
         loadAUser(index: 0)
@@ -85,7 +115,7 @@ class DataLoader {
         }
     }
     
-    public static func saveUser(user: User) {
+    /*public static func saveUser(user: User) {
         ref.child("Users").child("\(user.number)").child("Username").setValue(user.username)
         ref.child("Users").child("\(user.number)").child("Password").setValue(user.password)
         ref.child("Users").child("\(user.number)").child("First Name").setValue(user.firstName)
@@ -94,6 +124,6 @@ class DataLoader {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         ref.child("Users").child("\(user.number)").child("Date of Birth").setValue(dateFormatter.string(from: user.dateOfBirth))
-    }
+    }*/
     
 }

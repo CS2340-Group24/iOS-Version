@@ -10,7 +10,6 @@ import Foundation
 
 class User {
     
-    private(set) var number: Int
     private(set) var username: String
     private(set) var password: String
     private(set) var firstName: String
@@ -18,8 +17,7 @@ class User {
     private(set) var dateOfBirth: Date
     private(set) var gender: Gender
     
-    init(number: Int, username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
-        self.number = number
+    init(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
         self.username = username
         self.password = password
         self.firstName = firstName

@@ -35,8 +35,9 @@ class LoginViewController: UIViewController {
     // MARK: Actions
     @IBAction func login(_ sender: UIButton) {
         let username: String = usernameTextField.text!
-        if let user = Model.getUser(username: username) {
-            if passwordTextField.text == user.password {
+        Model.findUser(username: username, action: {user in
+        //if let user = Model.getUser(username: username) {
+            if self.passwordTextField.text == user.password {
                 let alert = UIAlertController(title: "Login Successful", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
@@ -45,11 +46,11 @@ class LoginViewController: UIViewController {
                 }))
                 self.present(alert, animated: true, completion: nil)
             } else {
-                presentAlert(title: "Incorrect username or password", message: "")
+                self.presentAlert(title: "Incorrect username or password", message: "")
             }
-        } else {
-            presentAlert(title: "Incorrect username or password", message: "")
-        }
+        //} else {
+            //presentAlert(title: "Incorrect username or password", message: "")
+        })
     }
     
 }

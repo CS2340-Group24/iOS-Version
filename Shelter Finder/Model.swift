@@ -12,10 +12,16 @@ import FirebaseDatabase
 class Model {
     
     static var userList: UserList = UserList()
+    static var user: User?
     
     static func configure() {
         DataLoader.start()
-        DataLoader.loadUsers()
+        //DataLoader.loadUsers()
+    }
+    
+    // Checks whether user with username exists. If so, action is performed
+    static func findUser(username: String, action: @escaping (User) -> Void) {
+        DataLoader.findUser(username: username, action: action)
     }
     
     static func addUser(user: User) {
@@ -23,13 +29,13 @@ class Model {
     }
     
     static func createUser(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
-        let user = User(number: userList.numUsers(), username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
+        let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
         userList.addUser(user: user)
-        DataLoader.saveUser(user: user)
+        //DataLoader.saveUser(user: user)
     }
     
     static func addUser(number: Int, username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
-        let user = User(number: number, username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
+        let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
         userList.addUser(user: user)
     }
     

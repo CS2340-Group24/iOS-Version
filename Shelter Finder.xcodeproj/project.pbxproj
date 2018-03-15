@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04FEED0DE1B271164214E35A /* Pods_Shelter_FinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A300D51ECA1D28D8CC485B7 /* Pods_Shelter_FinderUITests.framework */; };
+		4081D9D9205B242E00E63A69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */; };
 		40CD4A9B203CBCD90017F7AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CD4A9A203CBCD90017F7AD /* LoginViewController.swift */; };
 		40CD4A9D203CBF350017F7AD /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CD4A9C203CBF350017F7AD /* LoggedInViewController.swift */; };
 		40DADCBB203A2E5E002C8E4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DADCBA203A2E5E002C8E4D /* AppDelegate.swift */; };
@@ -22,7 +23,6 @@
 		40EF39AC2046256100D7F860 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF39AB2046256100D7F860 /* User.swift */; };
 		40EF39AE2046296D00D7F860 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF39AD2046296D00D7F860 /* Gender.swift */; };
 		40EF39B02046372F00D7F860 /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF39AF2046372F00D7F860 /* UserList.swift */; };
-		40F6C908205309640003E557 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40F6C907205309640003E557 /* GoogleService-Info.plist */; };
 		40F6C90A205309A30003E557 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F6C909205309A30003E557 /* Model.swift */; };
 		40F6C90C205309D60003E557 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F6C90B205309D60003E557 /* DataLoader.swift */; };
 		45A8F34FC1B6C536683E7451 /* Pods_Shelter_FinderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFEB529E1E3F40A34A5AED4 /* Pods_Shelter_FinderTests.framework */; };
@@ -50,6 +50,7 @@
 		2013262C5B7C386CF8D73D33 /* Pods-Shelter Finder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shelter Finder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shelter Finder/Pods-Shelter Finder.release.xcconfig"; sourceTree = "<group>"; };
 		28496F38AF4CF9DE74619C6B /* Pods_Shelter_Finder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shelter_Finder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A300D51ECA1D28D8CC485B7 /* Pods_Shelter_FinderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shelter_FinderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40CD4A9A203CBCD90017F7AD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		40CD4A9C203CBF350017F7AD /* LoggedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
 		40DADCB7203A2E5E002C8E4D /* Shelter Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelter Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +71,6 @@
 		40EF39AB2046256100D7F860 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		40EF39AD2046296D00D7F860 /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		40EF39AF2046372F00D7F860 /* UserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
-		40F6C907205309640003E557 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Users/aberchenko3/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40F6C909205309A30003E557 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		40F6C90B205309D60003E557 /* DataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		48CD1CC64ED4BF88E6BE5205 /* Pods-Shelter Finder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shelter Finder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shelter Finder/Pods-Shelter Finder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		40DADCAE203A2E5E002C8E4D = {
 			isa = PBXGroup;
 			children = (
-				40F6C907205309640003E557 /* GoogleService-Info.plist */,
+				4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */,
 				40DADCB9203A2E5E002C8E4D /* Shelter Finder */,
 				40DADCCE203A2E5F002C8E4D /* Shelter FinderTests */,
 				40DADCD9203A2E5F002C8E4D /* Shelter FinderUITests */,
@@ -312,7 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40DADCC5203A2E5F002C8E4D /* LaunchScreen.storyboard in Resources */,
-				40F6C908205309640003E557 /* GoogleService-Info.plist in Resources */,
+				4081D9D9205B242E00E63A69 /* GoogleService-Info.plist in Resources */,
 				40DADCC2203A2E5E002C8E4D /* Assets.xcassets in Resources */,
 				40DADCC0203A2E5E002C8E4D /* Main.storyboard in Resources */,
 			);

@@ -79,7 +79,32 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         if username == "" || password1 == "" || password2 == "" || firstName == "" || lastName == "" {
             presentAlert(title: "Not all fields filled", message: "Please fill out all the fields")
-        } else if !Model.contains(username: username) {
+        } else if username.contains("\"") || password1.contains("\"") || firstName.contains("\"") || lastName.contains("\"") {
+            presentAlert(title: "Illegal character used", message: "Do not use the character \"")
+        } else {
+            Model.findUser(username: username, action: {user in
+                self.presentAlert(title: "Username already taken", message: "Please choose a different username")
+            }, other: {_ in
+                if password1 == password2 {
+                    //let newUser = User(username: username, password: password1, firstName: firstName
+                    //    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
+                    Model.createUser(username: username, password: password1, firstName: firstName
+                        , lastName: lastName, dateOfBirth: dateOfBirth, gender: self.gender)
+                    
+                    let alert = UIAlertController(title: "Registration Successful", message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                        let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
+                        self.present(next, animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                } else {
+                    self.presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
+                }
+            })
+        }
+        /*if !Model.contains(username: username) {
             if password1 == password2 {
                 //let newUser = User(username: username, password: password1, firstName: firstName
                 //    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
@@ -99,7 +124,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             }
         } else {
             presentAlert(title: "Username already taken", message: "Please choose a different username")
-        }
+        }*/
     }
     
 }

@@ -36,8 +36,8 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: UIButton) {
         let username: String = usernameTextField.text!
         Model.findUser(username: username, action: {user in
-        //if let user = Model.getUser(username: username) {
             if self.passwordTextField.text == user.password {
+                Model.user = user
                 let alert = UIAlertController(title: "Login Successful", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
                     NSLog("The \"OK\" alert occured.")
@@ -48,8 +48,8 @@ class LoginViewController: UIViewController {
             } else {
                 self.presentAlert(title: "Incorrect username or password", message: "")
             }
-        //} else {
-            //presentAlert(title: "Incorrect username or password", message: "")
+        }, other: {_ in
+            self.presentAlert(title: "Incorrect username or password", message: "")
         })
     }
     

@@ -11,30 +11,32 @@ import FirebaseDatabase
 
 class Model {
     
-    static var userList: UserList = UserList()
     static var user: User?
+    static var shelters: [Shelter] = []
     
     static func configure() {
         DataLoader.start()
-        //DataLoader.loadUsers()
+        DataLoader.loadShelters()
     }
     
-    // Checks whether user with username exists. If so, action is performed
-    static func findUser(username: String, action: @escaping (User) -> Void) {
-        DataLoader.findUser(username: username, action: action)
-    }
-    
-    static func addUser(user: User) {
-        userList.addUser(user: user)
+    /**
+     * Attempts to find user with username user. If successful, performs action with the found user, otherwise performs other
+     */
+    static func findUser(username: String, action: @escaping (User) -> Void, other: @escaping () -> Void) {
+        DataLoader.findUser(username: username, action: action, other: other)
     }
     
     static func createUser(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
         let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
-        userList.addUser(user: user)
-        //DataLoader.saveUser(user: user)
+        //userList.addUser(user: user)
+        DataLoader.saveUser(user: user)
     }
     
-    static func addUser(number: Int, username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
+    static func addShelter(key: Int, name: String, capacity: String, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
+        shelters.append(Shelter(key: key, name: name, capacity: capacity, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone))
+    }
+    
+    /*static func addUser(number: Int, username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
         let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
         userList.addUser(user: user)
     }
@@ -49,6 +51,6 @@ class Model {
     
     static func getUser(username: String) -> User? {
         return userList.getUser(username:username)
-    }
+    }*/
     
 }

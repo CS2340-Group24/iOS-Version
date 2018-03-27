@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		04FEED0DE1B271164214E35A /* Pods_Shelter_FinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A300D51ECA1D28D8CC485B7 /* Pods_Shelter_FinderUITests.framework */; };
 		4081D9D9205B242E00E63A69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */; };
+		40BA9C1A206AD3E10049FB0B /* ShelterListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BA9C19206AD3E10049FB0B /* ShelterListCell.swift */; };
+		40BA9C1C206AD5E90049FB0B /* ShelterListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BA9C1B206AD5E80049FB0B /* ShelterListTable.swift */; };
+		40BA9C1E206AD7300049FB0B /* ShelterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BA9C1D206AD7300049FB0B /* ShelterListViewController.swift */; };
 		40CD4A9B203CBCD90017F7AD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CD4A9A203CBCD90017F7AD /* LoginViewController.swift */; };
 		40CD4A9D203CBF350017F7AD /* LoggedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CD4A9C203CBF350017F7AD /* LoggedInViewController.swift */; };
 		40DADCBB203A2E5E002C8E4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DADCBA203A2E5E002C8E4D /* AppDelegate.swift */; };
@@ -51,6 +54,9 @@
 		28496F38AF4CF9DE74619C6B /* Pods_Shelter_Finder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shelter_Finder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A300D51ECA1D28D8CC485B7 /* Pods_Shelter_FinderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shelter_FinderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		40BA9C19206AD3E10049FB0B /* ShelterListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelterListCell.swift; sourceTree = "<group>"; };
+		40BA9C1B206AD5E80049FB0B /* ShelterListTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelterListTable.swift; sourceTree = "<group>"; };
+		40BA9C1D206AD7300049FB0B /* ShelterListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelterListViewController.swift; sourceTree = "<group>"; };
 		40CD4A9A203CBCD90017F7AD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		40CD4A9C203CBF350017F7AD /* LoggedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedInViewController.swift; sourceTree = "<group>"; };
 		40DADCB7203A2E5E002C8E4D /* Shelter Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shelter Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +148,9 @@
 				40E5B0C9204DFAF800362506 /* Shelter.swift */,
 				40EF39AD2046296D00D7F860 /* Gender.swift */,
 				40DADCBE203A2E5E002C8E4D /* Main.storyboard */,
+				40BA9C1B206AD5E80049FB0B /* ShelterListTable.swift */,
+				40BA9C1D206AD7300049FB0B /* ShelterListViewController.swift */,
+				40BA9C19206AD3E10049FB0B /* ShelterListCell.swift */,
 				40EF39AF2046372F00D7F860 /* UserList.swift */,
 				40EF39A92046227900D7F860 /* RegisterViewController.swift */,
 				40CD4A9C203CBF350017F7AD /* LoggedInViewController.swift */,
@@ -478,11 +487,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F6C90C205309D60003E557 /* DataLoader.swift in Sources */,
+				40BA9C1C206AD5E90049FB0B /* ShelterListTable.swift in Sources */,
 				40CD4A9B203CBCD90017F7AD /* LoginViewController.swift in Sources */,
 				40EF39AA2046227900D7F860 /* RegisterViewController.swift in Sources */,
+				40BA9C1A206AD3E10049FB0B /* ShelterListCell.swift in Sources */,
 				40EF39AC2046256100D7F860 /* User.swift in Sources */,
 				40DADCBD203A2E5E002C8E4D /* StartupViewController.swift in Sources */,
 				40EF39B02046372F00D7F860 /* UserList.swift in Sources */,
+				40BA9C1E206AD7300049FB0B /* ShelterListViewController.swift in Sources */,
 				40F6C90A205309A30003E557 /* Model.swift in Sources */,
 				40DADCBB203A2E5E002C8E4D /* AppDelegate.swift in Sources */,
 				40CD4A9D203CBF350017F7AD /* LoggedInViewController.swift in Sources */,

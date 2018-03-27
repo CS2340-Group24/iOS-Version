@@ -36,6 +36,14 @@ class Model {
         shelters.append(Shelter(key: key, name: name, capacity: capacity, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone))
     }
     
+    static func numberOfShelters() -> Int {
+        return shelters.count
+    }
+    
+    static func getShelter(index: Int) -> Shelter {
+        return shelters[index]
+    }
+    
     /*static func addUser(number: Int, username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
         let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
         userList.addUser(user: user)

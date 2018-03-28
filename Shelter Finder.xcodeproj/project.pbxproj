@@ -22,6 +22,7 @@
 		40DADCD0203A2E5F002C8E4D /* Shelter_FinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DADCCF203A2E5F002C8E4D /* Shelter_FinderTests.swift */; };
 		40DADCDB203A2E5F002C8E4D /* Shelter_FinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DADCDA203A2E5F002C8E4D /* Shelter_FinderUITests.swift */; };
 		40E5B0CA204DFAF800362506 /* Shelter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E5B0C9204DFAF800362506 /* Shelter.swift */; };
+		40E99EDC206B023B00057DE8 /* SearchCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E99EDB206B023B00057DE8 /* SearchCriteria.swift */; };
 		40EF39AA2046227900D7F860 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF39A92046227900D7F860 /* RegisterViewController.swift */; };
 		40EF39AC2046256100D7F860 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF39AB2046256100D7F860 /* User.swift */; };
 		40EF39AE2046296D00D7F860 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EF39AD2046296D00D7F860 /* Gender.swift */; };
@@ -73,6 +74,7 @@
 		40DADCDA203A2E5F002C8E4D /* Shelter_FinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shelter_FinderUITests.swift; sourceTree = "<group>"; };
 		40DADCDC203A2E5F002C8E4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40E5B0C9204DFAF800362506 /* Shelter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shelter.swift; sourceTree = "<group>"; };
+		40E99EDB206B023B00057DE8 /* SearchCriteria.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCriteria.swift; sourceTree = "<group>"; };
 		40EF39A92046227900D7F860 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		40EF39AB2046256100D7F860 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		40EF39AD2046296D00D7F860 /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				40DADCC3203A2E5F002C8E4D /* LaunchScreen.storyboard */,
 				40DADCC6203A2E5F002C8E4D /* Info.plist */,
 				40F6C909205309A30003E557 /* Model.swift */,
+				40E99EDB206B023B00057DE8 /* SearchCriteria.swift */,
 				40F6C90B205309D60003E557 /* DataLoader.swift */,
 			);
 			path = "Shelter Finder";
@@ -492,6 +495,7 @@
 				40EF39AA2046227900D7F860 /* RegisterViewController.swift in Sources */,
 				40BA9C1A206AD3E10049FB0B /* ShelterListCell.swift in Sources */,
 				40EF39AC2046256100D7F860 /* User.swift in Sources */,
+				40E99EDC206B023B00057DE8 /* SearchCriteria.swift in Sources */,
 				40DADCBD203A2E5E002C8E4D /* StartupViewController.swift in Sources */,
 				40EF39B02046372F00D7F860 /* UserList.swift in Sources */,
 				40BA9C1E206AD7300049FB0B /* ShelterListViewController.swift in Sources */,

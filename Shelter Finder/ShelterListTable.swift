@@ -11,15 +11,20 @@ import UIKit
 class ShelterListTable: UITableView, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Model.numberOfShelters()
+        return Model.numberOfSearchedShelters()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShelterListCell", for: indexPath) as! ShelterListCell
         
-        let shelter = Model.getShelter(index: indexPath.row)
+        let shelter = Model.getSearchedShelter(index: indexPath.row)
         cell.shelterLabel.text = shelter.name
-        cell.restrictionsLabel.text = shelter.restrictions
+        cell.restrictionsLabel.text = shelter.notes
+        if let distance = shelter.distance {
+            cell.distanceLabel.text = "\(distance) miles away"
+        } else {
+            cell.distanceLabel.text = shelter.restrictions
+        }
         
         return cell
     }

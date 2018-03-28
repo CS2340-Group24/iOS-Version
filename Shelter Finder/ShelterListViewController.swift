@@ -8,20 +8,28 @@
 
 import UIKit
 
-class ShelterListViewController: UIViewController {
+class ShelterListViewController: UIViewController, UISearchBarDelegate {
     
     // MARK: Properties
     @IBOutlet weak var shelterListTable: ShelterListTable!
+    @IBOutlet weak var searchBar: UISearchBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        SearchCriteria.reset()
         shelterListTable.dataSource = shelterListTable
+        searchBar.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        SearchCriteria.search = searchText
+        shelterListTable.reloadData()
     }
     
 

@@ -11,8 +11,10 @@ import FirebaseDatabase
 
 class Model {
     
+    static var location: [Double]? = [33.774875, -84.397222]
     static var user: User?
     static var shelters: [Shelter] = []
+    private static var searchedShelters: [Shelter] = []
     
     static func configure() {
         DataLoader.start()
@@ -44,21 +46,36 @@ class Model {
         return shelters[index]
     }
     
-    /*static func addUser(number: Int, username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
-        let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
-        userList.addUser(user: user)
+    static func updateSearchedSelters() {
+        searchedShelters = []
+        var hasDistance = true
+        for shelter in shelters {
+            if SearchCriteria.fitsSearch(shelter: shelter) {
+                searchedShelters += [shelter]
+                if let _ = shelter.distance {
+                    
+                } else {
+                    hasDistance = false
+                }
+            }
+        }
+        if hasDistance {
+            searchedShelters.sort(by: { (shelter1: Shelter, shelter2: Shelter) -> Bool in
+                return shelter1.distance! <= shelter2.distance!
+            })
+        } else {
+            searchedShelters.sort(by: { (shelter1: Shelter, shelter2: Shelter) -> Bool in
+                return shelter1.name <= shelter2.name
+            })
+        }
     }
     
-    static func removeUser(username: String) {
-        userList.removeUser(username: username)
+    static func numberOfSearchedShelters() -> Int {
+        return searchedShelters.count
     }
     
-    static func contains(username: String) -> Bool {
-        return userList.contains(user: username)
+    static func getSearchedShelter(index: Int) -> Shelter {
+        return searchedShelters[index]
     }
-    
-    static func getUser(username: String) -> User? {
-        return userList.getUser(username:username)
-    }*/
     
 }

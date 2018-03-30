@@ -15,6 +15,7 @@ class Model {
     static var user: User?
     static var shelters: [Shelter] = []
     private static var searchedShelters: [Shelter] = []
+    static var currentShelter: Shelter?
     
     static func configure() {
         DataLoader.start()

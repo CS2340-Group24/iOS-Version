@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShelterListViewController: UIViewController, UISearchBarDelegate {
+class ShelterListViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate {
     
     // MARK: Properties
     @IBOutlet weak var shelterListTable: ShelterListTable!
@@ -17,8 +17,8 @@ class ShelterListViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        SearchCriteria.reset()
         shelterListTable.dataSource = shelterListTable
+        shelterListTable.delegate = self
         searchBar.delegate = self
     }
 
@@ -32,8 +32,15 @@ class ShelterListViewController: UIViewController, UISearchBarDelegate {
         shelterListTable.reloadData()
     }
     
-    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+    /*func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
         let next = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedSearchView") as! AdvancedSearchViewController
+        self.present(next, animated: true, completion: nil)
+    }*/
+    
+    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        print("Click")
+        Model.currentShelter = Model.getSearchedShelter(index: indexPath.row)
+        let next = self.storyboard?.instantiateViewController(withIdentifier: "ShelterView") as! ShelterViewController
         self.present(next, animated: true, completion: nil)
     }
     

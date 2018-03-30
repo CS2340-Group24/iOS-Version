@@ -1,19 +1,18 @@
 //
-//  LoggedInViewController.swift
+//  AdvancedSearchViewController.swift
 //  Shelter Finder
 //
-//  Created by Berchenko, Amiel D on 2/20/18.
+//  Created by Berchenko, Amiel D on 3/29/18.
 //  Copyright © 2018 Berchenko, Amiel D. All rights reserved.
 //
 
 import UIKit
 
-class LoggedInViewController: UIViewController {
+class AdvancedSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        //_ = Model()
     }
     
     override func didReceiveMemoryWarning() {
@@ -22,4 +21,5 @@ class LoggedInViewController: UIViewController {
     }
     
     
+
 }

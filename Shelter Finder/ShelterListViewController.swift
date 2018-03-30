@@ -32,6 +32,11 @@ class ShelterListViewController: UIViewController, UISearchBarDelegate {
         shelterListTable.reloadData()
     }
     
+    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+        let next = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedSearchView") as! AdvancedSearchViewController
+        self.present(next, animated: true, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation

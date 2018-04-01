@@ -13,6 +13,7 @@ class Shelter {
     var key: Int
     var name: String
     var capacity: String
+    var numericCapacity: Int
     var restrictions: String
     var longitude: Double
     var latitude: Double
@@ -20,8 +21,10 @@ class Shelter {
     var notes: String
     var phone: String
     var distance: Double?
+    var currentAvailable: Int
+    var reservations: [Reservation]
     
-    init(key: Int, name: String, capacity: String, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
+    init(key: Int, name: String, capacity: String, numericCapacity: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
         self.key = key
         self.name = name
         self.capacity = capacity
@@ -31,6 +34,7 @@ class Shelter {
         self.address = address
         self.notes = notes
         self.phone = phone
+        self.numericCapacity = numericCapacity
         
         if let location = Model.location {
             let lat1 = .pi * location[0] / 180
@@ -43,7 +47,13 @@ class Shelter {
             let c = 2 * atan2(sqrt(a), sqrt(1-a))
             distance = Double(round(10 * 3959 * c) / 10)
         }
+        
+        currentAvailable = numericCapacity
+        reservations = []
     }
     
+    func addReservation(reservation: Reservation) {
+        reservations.append(reservation)
+    }
     
 }

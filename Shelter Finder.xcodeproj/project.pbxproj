@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04FEED0DE1B271164214E35A /* Pods_Shelter_FinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A300D51ECA1D28D8CC485B7 /* Pods_Shelter_FinderUITests.framework */; };
+		406CBEAA20715D4C00E49B23 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406CBEA920715D4C00E49B23 /* Reservation.swift */; };
 		4081D9D9205B242E00E63A69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */; };
 		40BA9C1A206AD3E10049FB0B /* ShelterListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BA9C19206AD3E10049FB0B /* ShelterListCell.swift */; };
 		40BA9C1C206AD5E90049FB0B /* ShelterListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BA9C1B206AD5E80049FB0B /* ShelterListTable.swift */; };
@@ -56,6 +57,7 @@
 		2013262C5B7C386CF8D73D33 /* Pods-Shelter Finder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shelter Finder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shelter Finder/Pods-Shelter Finder.release.xcconfig"; sourceTree = "<group>"; };
 		28496F38AF4CF9DE74619C6B /* Pods_Shelter_Finder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shelter_Finder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A300D51ECA1D28D8CC485B7 /* Pods_Shelter_FinderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shelter_FinderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		406CBEA920715D4C00E49B23 /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40BA9C19206AD3E10049FB0B /* ShelterListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelterListCell.swift; sourceTree = "<group>"; };
 		40BA9C1B206AD5E80049FB0B /* ShelterListTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelterListTable.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				40DADCBE203A2E5E002C8E4D /* Main.storyboard */,
 				40F6C909205309A30003E557 /* Model.swift */,
 				40EF39A92046227900D7F860 /* RegisterViewController.swift */,
+				406CBEA920715D4C00E49B23 /* Reservation.swift */,
 				40E99EDB206B023B00057DE8 /* SearchCriteria.swift */,
 				40E5B0C9204DFAF800362506 /* Shelter.swift */,
 				40BA9C19206AD3E10049FB0B /* ShelterListCell.swift */,
@@ -497,6 +500,7 @@
 			files = (
 				40F6C90C205309D60003E557 /* DataLoader.swift in Sources */,
 				40BA9C1C206AD5E90049FB0B /* ShelterListTable.swift in Sources */,
+				406CBEAA20715D4C00E49B23 /* Reservation.swift in Sources */,
 				40CD4A9B203CBCD90017F7AD /* LoginViewController.swift in Sources */,
 				40EF39AA2046227900D7F860 /* RegisterViewController.swift in Sources */,
 				40BA9C1A206AD3E10049FB0B /* ShelterListCell.swift in Sources */,

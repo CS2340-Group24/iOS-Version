@@ -12,7 +12,11 @@ import FirebaseDatabase
 class Model {
     
     static var location: [Double]? = [33.774875, -84.397222]
-    static var user: User?
+    static var user: User? {
+        didSet {
+            DataLoader.userLoadReservation(username: user!.username)
+        }
+    }
     static var shelters: [Shelter] = []
     private static var searchedShelters: [Shelter] = []
     static var currentShelter: Shelter?
@@ -35,8 +39,8 @@ class Model {
         DataLoader.saveUser(user: user)
     }
     
-    static func addShelter(key: Int, name: String, capacity: String, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
-        shelters.append(Shelter(key: key, name: name, capacity: capacity, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone))
+    static func addShelter(key: Int, name: String, capacity: String, numericCapacity: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
+        shelters.append(Shelter(key: key, name: name, capacity: capacity, numericCapacity: numericCapacity, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone))
     }
     
     static func numberOfShelters() -> Int {
@@ -77,6 +81,12 @@ class Model {
     
     static func getSearchedShelter(index: Int) -> Shelter {
         return searchedShelters[index]
+    }
+    
+    static func userAddReservation(reservation: Reservation) {
+        if let thisUser = user {
+            thisUser.addReservation(reservation: reservation)
+        }
     }
     
 }

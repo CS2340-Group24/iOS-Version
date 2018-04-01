@@ -16,6 +16,7 @@ class User {
     private(set) var lastName: String
     private(set) var dateOfBirth: Date
     private(set) var gender: Gender
+    private(set) var reservations: [Reservation]
     
     init(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
         self.username = username
@@ -24,6 +25,11 @@ class User {
         self.lastName = lastName
         self.dateOfBirth = dateOfBirth
         self.gender = gender
+        reservations = []
+    }
+    
+    func addReservation(reservation: Reservation) {
+        reservations.append(reservation)
     }
     
 }

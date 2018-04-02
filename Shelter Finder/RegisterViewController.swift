@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     // MARK: Properties
     @IBOutlet weak var usernameField: UITextField!
@@ -23,7 +23,12 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        self.hideKeyboardWhenTappedAround()
+        usernameField.delegate = self
+        passwordField1.delegate = self
+        passwordField2.delegate = self
+        firstNameField.delegate = self
+        lastNameField.delegate = self
         // Connect data:
         self.genderPicker.delegate = self
         self.genderPicker.dataSource = self
@@ -125,6 +130,23 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         } else {
             presentAlert(title: "Username already taken", message: "Please choose a different username")
         }*/
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == usernameField {
+            passwordField1.becomeFirstResponder()
+        } else if textField == passwordField1 {
+            passwordField2.becomeFirstResponder()
+        } else if textField == passwordField2 {
+            firstNameField.becomeFirstResponder()
+        } else if textField == firstNameField {
+            lastNameField.becomeFirstResponder()
+        } else if textField == lastNameField {
+            dismissKeyboard()
+        }
+        
+        return true
     }
     
 }

@@ -8,15 +8,19 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view, typically from a nib.
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,14 +41,15 @@ class LoginViewController: UIViewController {
         let username: String = usernameTextField.text!
         Model.findUser(username: username, action: {user in
             if self.passwordTextField.text == user.password {
-                Model.user = user
-                let alert = UIAlertController(title: "Login Successful", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                    let next = self.storyboard?.instantiateViewController(withIdentifier: "LoggedInView") as! LoggedInViewController
-                    self.present(next, animated: true, completion: nil)
-                }))
-                self.present(alert, animated: true, completion: nil)
+                Model.setUser(user: user, action: { _ in
+                    let alert = UIAlertController(title: "Login Successful", message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                        NSLog("The \"OK\" alert occured.")
+                        let next = self.storyboard?.instantiateViewController(withIdentifier: "HomeView") as! HomeViewController
+                        self.present(next, animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                })
             } else {
                 self.presentAlert(title: "Incorrect username or password", message: "")
             }
@@ -53,4 +58,33 @@ class LoginViewController: UIViewController {
         })
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == usernameTextField {
+            //dismissKeyboard()
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            dismissKeyboard()
+            if usernameTextField.text != "" && passwordTextField.text != "" {
+                login(loginButton)
+            }
+        }
+        
+        return true
+    }
+    
+}
+
+
+// Put this piece of code anywhere you like
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

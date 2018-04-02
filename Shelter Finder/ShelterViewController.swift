@@ -20,6 +20,7 @@ class ShelterViewController: UIViewController {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var capacityLabel: UILabel!
     @IBOutlet weak var reservationsLabel: UILabel!
+    @IBOutlet weak var editReservationsButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,19 @@ class ShelterViewController: UIViewController {
         //addressButton.setTitle(Model.currentShelter!.address, for: .normal)
         addressLabel.text = Model.currentShelter!.address
         phoneLabel.text = Model.currentShelter!.phone
+        capacityLabel.text = "Current capacity: \(Model.currentShelter!.currentAvailable)"
+        var isReserved = false
+        if let reservation = Model.user!.reservation {
+            if reservation.shelter!.key == Model.currentShelter!.key {
+                isReserved = true
+                reservationsLabel.text = "Spots reserved: \(reservation.beds)"
+                editReservationsButton.setTitle("Edit reservation", for: .normal)
+            }
+        }
+        if !isReserved {
+            reservationsLabel.text = "No reservation yet"
+            editReservationsButton.setTitle("Create reservation", for: .normal)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,5 +63,11 @@ class ShelterViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: Actions
+    
+    @IBAction func editReservations(_ sender: Any) {
+    }
+    
 
 }

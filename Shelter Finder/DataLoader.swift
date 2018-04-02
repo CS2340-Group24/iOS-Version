@@ -92,6 +92,60 @@ class DataLoader {
         ref.child("Users").child(user.username).child("Date of Birth").setValue(dateFormatter.string(from: user.dateOfBirth))
     }
     
+    static func userLoadReservation(username: String, action: @escaping () -> Void) {
+        ref.child("Users").child(username).child("Reservation").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value1 = snapshot.value as? String ?? ""
+            if let reservationNum = Int(value1) {
+                if reservationNum != -1 {
+                    ref.child("Reservations").child("\(reservationNum)").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let value = snapshot.value as? NSDictionary
+                        
+                        let bedsString = value?["Beds"] as? String ?? ""
+                        if bedsString != "" {
+                            let beds = Int(bedsString)!
+                            
+                            let shelterIndex = Int(value?["Shelter"] as? String ?? "")!
+                            
+                            let username = value?["User"] as? String ?? ""
+                            print("Reading complete")
+                            if let currentUser = Model.user {
+                                if currentUser.username == username {
+                                    if shelterIndex >= 0 && shelterIndex < Model.numberOfShelters() {
+                                        _ = Reservation(user: currentUser, shelter: Model.getShelter(index: shelterIndex), beds: beds)
+                                        //print(reservation.shelter!.name)
+                                        //Model.userAddReservation(reservation: reservation)
+                                    } else {
+                                        _ = Reservation(user: currentUser, shelter: shelterIndex, beds: beds)
+                                        //Model.userAddReservation(reservation: reservation)
+                                    }
+                                } else {
+                                    if shelterIndex >= 0 && shelterIndex < Model.numberOfShelters() {
+                                        _ = Reservation(user: username, shelter: Model.getShelter(index: shelterIndex), beds: beds)
+                                        //Model.userAddReservation(reservation: reservation)
+                                    } else {
+                                        _ = Reservation(user: username, shelter: shelterIndex, beds: beds)
+                                        //Model.userAddReservation(reservation: reservation)
+                                    }
+                                }
+                                
+                            }
+                            
+                        }
+                        action()
+                    }) { (error) in
+                        print(error.localizedDescription)
+                        action()
+                    }
+                }
+            }
+            action()
+        }) { (error) in
+            print(error.localizedDescription)
+            action()
+        }
+    }
+    
     /*static func loadReservations(user: User) {
         ref.child("Users").child(user.username).child("Reservations").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
@@ -112,7 +166,7 @@ class DataLoader {
         }
     }*/
     
-    static func userLoadReservation(username: String) {
+    /*static func userLoadReservation(username: String) {
         ref.child("Users").child(username).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
@@ -179,6 +233,6 @@ class DataLoader {
                 print(error.localizedDescription)
             }
         }
-    }
+    }*/
     
 }

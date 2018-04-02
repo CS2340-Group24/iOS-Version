@@ -39,10 +39,18 @@ class AdvancedSearchViewController: UIViewController {
     
     @IBAction func maleSwitched(_ sender: UISwitch) {
         SearchCriteria.male = sender.isOn
+        if sender.isOn && SearchCriteria.female {
+            SearchCriteria.female = false
+            femaleSwitch.isOn = false
+        }
     }
     
     @IBAction func femaleSwitched(_ sender: UISwitch) {
         SearchCriteria.female = sender.isOn
+        if sender.isOn && SearchCriteria.male {
+            SearchCriteria.male = false
+            maleSwitch.isOn = false
+        }
     }
     
     @IBAction func familySwitched(_ sender: UISwitch) {

@@ -14,43 +14,33 @@ class Reservation {
     private(set) var shelter: Shelter?
     private(set) var shelterIndex: Int?
     var beds: Int
-    var startDate: Date
-    var endDate: Date
     
-    init (user: User, shelter: Shelter, beds: Int, startDate: Date, endDate: Date) {
+    init (user: User, shelter: Shelter, beds: Int) {
         self.user = user
         self.shelter = shelter
         self.beds = beds
-        self.startDate = startDate
-        self.endDate = endDate
         
-        user.addReservation(reservation: self)
+        user.reservation = self
     }
     
-    init (user: String, shelter: Shelter, beds: Int, startDate: Date, endDate: Date) {
+    init (user: String, shelter: Shelter, beds: Int) {
         self.username = user
         self.shelter = shelter
         self.beds = beds
-        self.startDate = startDate
-        self.endDate = endDate
     }
     
-    init (user: User, shelter: Int, beds: Int, startDate: Date, endDate: Date) {
+    init (user: User, shelter: Int, beds: Int) {
         self.user = user
         self.shelterIndex = shelter
         self.beds = beds
-        self.startDate = startDate
-        self.endDate = endDate
         
-        user.addReservation(reservation: self)
+        user.reservation = self
     }
 
-    init (user: String, shelter: Int, beds: Int, startDate: Date, endDate: Date) {
+    init (user: String, shelter: Int, beds: Int) {
         self.username = user
         self.shelterIndex = shelter
         self.beds = beds
-        self.startDate = startDate
-        self.endDate = endDate
     }
     
 }

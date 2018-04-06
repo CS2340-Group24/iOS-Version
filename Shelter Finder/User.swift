@@ -16,15 +16,17 @@ class User {
     private(set) var lastName: String
     private(set) var dateOfBirth: Date
     private(set) var gender: Gender
+    private(set) var userType: UserType
     var reservation: Reservation?
     
-    init(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
+    init(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender, userType: UserType) {
         self.username = username
         self.password = password
         self.firstName = firstName
         self.lastName = lastName
         self.dateOfBirth = dateOfBirth
         self.gender = gender
+        self.userType = userType
     }
     
 }

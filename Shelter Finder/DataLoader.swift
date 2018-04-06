@@ -35,11 +35,18 @@ class DataLoader {
                 } else {
                     gender = Gender.notSpecified
                 }
+                let userString = value?["User Type"] as? String ?? ""
+                let userType: UserType
+                if let currentType = UserType(rawValue: userString) {
+                    userType = currentType
+                } else {
+                    userType = UserType.general
+                }
                 let dob = value?["Date of Birth"] as? String ?? ""
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy"
                 let dateOfBirth = dateFormatter.date(from: dob)!
-                let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
+                let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, userType: userType)
                 
                 action(user)
             } else {
@@ -65,6 +72,7 @@ class DataLoader {
             if name != "" {
                 let capacity = value?["Capacity"] as? String ?? ""
                 let numericCapacity = Int(value?["Numeric Capacity"] as? String ?? "")
+                let available = Int(value?["Available"] as? String ?? "")
                 let restrictions = value?["Restrictions"] as? String ?? ""
                 let longitudeString = value?["Longitude"] as? String ?? ""
                 let longitude = Double(longitudeString)
@@ -73,7 +81,7 @@ class DataLoader {
                 let address = value?["Address"] as? String ?? ""
                 let notes = value?["Special Notes"] as? String ?? ""
                 let phone = value?["Phone Number"] as? String ?? ""
-                Model.addShelter(key: index, name: name, capacity: capacity, numericCapacity: numericCapacity!, restrictions: restrictions, longitude: longitude!, latitude: latitude!, address: address, notes: notes, phone: phone)
+                Model.addShelter(key: index, name: name, capacity: capacity, numericCapacity: numericCapacity!, available: available!, restrictions: restrictions, longitude: longitude!, latitude: latitude!, address: address, notes: notes, phone: phone)
                 loadAShelter(index: index + 1)
             }
             // ...
@@ -87,6 +95,7 @@ class DataLoader {
         ref.child("Users").child(user.username).child("First Name").setValue(user.firstName)
         ref.child("Users").child(user.username).child("Last Name").setValue(user.lastName)
         ref.child("Users").child(user.username).child("Gender").setValue(user.gender.rawValue)
+        ref.child("Users").child(user.username).child("User Type").setValue(user.userType.rawValue)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         ref.child("Users").child(user.username).child("Date of Birth").setValue(dateFormatter.string(from: user.dateOfBirth))

@@ -126,7 +126,7 @@
                                     <navigationItem title="Advanced Search" id="P4G-TQ-m4y">
                                         <barButtonItem key="rightBarButtonItem" title="Done" id="yiY-KX-kBP">
                                             <connections>
-                                                <segue destination="dk7-7G-oEG" kind="show" id="f8R-6v-urb"/>
+                                                <action selector="donePressed:" destination="Vcf-1J-Hae" id="Ubs-xz-aIy"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -437,7 +437,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Edit Reservation"/>
                                 <connections>
-                                    <segue destination="Mk9-zW-ekz" kind="show" id="sPj-PI-d8m"/>
+                                    <action selector="editReservationsPressed:" destination="QBe-W1-Nsr" eventType="touchUpInside" id="Lzo-Cq-0KO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zuk-Bh-lL8">
@@ -488,7 +488,7 @@
                         <outlet property="addressLabel" destination="y2F-mg-HeF" id="Lbe-xp-0Dl"/>
                         <outlet property="capacityLabel" destination="fFw-8t-kSA" id="fPR-AD-1uw"/>
                         <outlet property="descriptionLabel" destination="Q8t-92-9b7" id="gUM-Y9-fLS"/>
-                        <outlet property="editReservationsButton" destination="R74-WU-MDT" id="05j-Da-IoH"/>
+                        <outlet property="editReservationsButton" destination="R74-WU-MDT" id="YQU-fg-ZRz"/>
                         <outlet property="phoneLabel" destination="Zuk-Bh-lL8" id="W0i-tR-EzJ"/>
                         <outlet property="reservationsLabel" destination="8NK-Tu-ThS" id="w0x-3p-J2L"/>
                         <outlet property="restrictionsLabel" destination="Vpc-Id-G3g" id="dyR-5x-25X"/>
@@ -502,7 +502,7 @@
         <!--Shelter List View Controller-->
         <scene sceneID="uRq-mt-XyR">
             <objects>
-                <viewController id="dk7-7G-oEG" customClass="ShelterListViewController" customModule="Shelter_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShelterListView" id="dk7-7G-oEG" customClass="ShelterListViewController" customModule="Shelter_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FND-kl-2Wf"/>
                         <viewControllerLayoutGuide type="bottom" id="rE0-Pw-kaC"/>
@@ -571,7 +571,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Vcf-1J-Hae" kind="show" id="eAX-mZ-0cv"/>
+                                    <action selector="advancedSearchPressed:" destination="dk7-7G-oEG" eventType="touchUpInside" id="jhY-C2-p9K"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tEK-Aa-LfU">
@@ -613,10 +613,10 @@
             </objects>
             <point key="canvasLocation" x="1688.8" y="794.75262368815595"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="92u-Y3-D06">
             <objects>
-                <viewController id="HNU-nB-Ipu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="HNU-nB-Ipu" customClass="MapViewController" customModule="Shelter_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wAZ-eS-QIg"/>
                         <viewControllerLayoutGuide type="bottom" id="xcn-db-qdf"/>
@@ -660,7 +660,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Vcf-1J-Hae" kind="show" id="TTf-7s-XMh"/>
+                                    <action selector="advancedSearchPressed:" destination="HNU-nB-Ipu" eventType="touchUpInside" id="KdC-2y-XRU"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IXw-uL-FCl">
@@ -746,8 +746,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Add/Remove Reservations"/>
                                 <connections>
-                                    <action selector="editReservations:" destination="qhG-dD-ASL" eventType="touchUpInside" id="HPO-ir-DQk"/>
-                                    <segue destination="Mk9-zW-ekz" kind="show" id="efR-Fw-Qq2"/>
+                                    <action selector="editReservationPressed:" destination="qhG-dD-ASL" eventType="touchUpInside" id="yDN-uR-tOy"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1U-fP-Yqp">
@@ -809,10 +808,10 @@
             </objects>
             <point key="canvasLocation" x="1682.4000000000001" y="1566.5667166416792"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Reservation View Controller-->
         <scene sceneID="YeG-MK-bpe">
             <objects>
-                <viewController id="Mk9-zW-ekz" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditReservationView" id="Mk9-zW-ekz" customClass="EditReservationViewController" customModule="Shelter_Finder" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GwF-x6-QkG"/>
                         <viewControllerLayoutGuide type="bottom" id="8gi-iv-7sc"/>
@@ -821,33 +820,98 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ffW-yF-oC0">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffW-yF-oC0">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Edit Reservation" id="Y1O-G9-RVY">
-                                        <barButtonItem key="leftBarButtonItem" title="Done" id="aqH-5d-ue8">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="lbF-t7-Yv3">
                                             <connections>
-                                                <segue destination="qhG-dD-ASL" kind="show" id="Orb-F1-Rjb"/>
+                                                <action selector="cancelPressed:" destination="Mk9-zW-ekz" id="2s0-7S-qYa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="aqH-5d-ue8">
+                                            <connections>
+                                                <action selector="savePressed:" destination="Mk9-zW-ekz" id="6Ee-Kz-MfL"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cm9-Ul-PTe">
+                                <rect key="frame" x="16" y="84" width="343" height="26"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Title">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="22"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jVE-1v-Z0l">
+                                <rect key="frame" x="16" y="130" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reservations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Xu-uT-cfL">
+                                <rect key="frame" x="16" y="161" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="tsP-aY-ori">
+                                <rect key="frame" x="140" y="192" width="94" height="29"/>
+                                <connections>
+                                    <action selector="stepperPressed:" destination="Mk9-zW-ekz" eventType="valueChanged" id="CyJ-uT-4sw"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max per person: 5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nom-6b-dN9">
+                                <rect key="frame" x="16" y="231" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cm9-Ul-PTe" firstAttribute="leading" secondItem="4Kc-LF-48x" secondAttribute="leadingMargin" id="BD9-Sy-bdc"/>
+                            <constraint firstItem="8Xu-uT-cfL" firstAttribute="top" secondItem="jVE-1v-Z0l" secondAttribute="bottom" constant="10" id="Dpc-Mu-Pyf"/>
+                            <constraint firstItem="ffW-yF-oC0" firstAttribute="leading" secondItem="4Kc-LF-48x" secondAttribute="leading" id="Gxm-GH-ByW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nom-6b-dN9" secondAttribute="trailing" id="I2W-uI-vie"/>
+                            <constraint firstItem="tsP-aY-ori" firstAttribute="centerX" secondItem="8Xu-uT-cfL" secondAttribute="centerX" id="Kzb-mL-8me"/>
+                            <constraint firstItem="cm9-Ul-PTe" firstAttribute="top" secondItem="ffW-yF-oC0" secondAttribute="bottom" constant="20" id="LdK-dv-0ve"/>
+                            <constraint firstItem="nom-6b-dN9" firstAttribute="top" secondItem="tsP-aY-ori" secondAttribute="bottom" constant="10" id="MYi-v0-Bya"/>
+                            <constraint firstItem="jVE-1v-Z0l" firstAttribute="top" secondItem="cm9-Ul-PTe" secondAttribute="bottom" constant="20" id="Rqd-jW-5Vl"/>
+                            <constraint firstItem="jVE-1v-Z0l" firstAttribute="leading" secondItem="4Kc-LF-48x" secondAttribute="leadingMargin" id="SEF-3F-Rkj"/>
+                            <constraint firstItem="nom-6b-dN9" firstAttribute="leading" secondItem="4Kc-LF-48x" secondAttribute="leadingMargin" id="Wq7-nr-oba"/>
+                            <constraint firstItem="cm9-Ul-PTe" firstAttribute="trailing" secondItem="4Kc-LF-48x" secondAttribute="trailingMargin" id="eDt-mR-M5n"/>
+                            <constraint firstItem="ffW-yF-oC0" firstAttribute="top" secondItem="GwF-x6-QkG" secondAttribute="bottom" id="ijy-5G-PqN"/>
+                            <constraint firstAttribute="trailing" secondItem="ffW-yF-oC0" secondAttribute="trailing" id="lMT-Yy-Cpl"/>
+                            <constraint firstItem="tsP-aY-ori" firstAttribute="top" secondItem="8Xu-uT-cfL" secondAttribute="bottom" constant="10" id="mBH-6t-YQo"/>
+                            <constraint firstItem="8Xu-uT-cfL" firstAttribute="leading" secondItem="4Kc-LF-48x" secondAttribute="leadingMargin" id="oO6-Qz-nI3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8Xu-uT-cfL" secondAttribute="trailing" id="rsi-L1-1Pb"/>
+                            <constraint firstItem="jVE-1v-Z0l" firstAttribute="trailing" secondItem="4Kc-LF-48x" secondAttribute="trailingMargin" id="txb-XL-xUu"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="availableLabel" destination="jVE-1v-Z0l" id="Nas-Lm-A4B"/>
+                        <outlet property="nameLabel" destination="cm9-Ul-PTe" id="pOG-dn-AYv"/>
+                        <outlet property="navigationTitle" destination="Y1O-G9-RVY" id="aAX-Go-aDL"/>
+                        <outlet property="reservationsLabel" destination="8Xu-uT-cfL" id="cN6-ZN-ukR"/>
+                        <outlet property="stepper" destination="tsP-aY-ori" id="uxJ-T2-SYe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etG-A3-Uwe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2476" y="1567"/>
+            <point key="canvasLocation" x="2476" y="1566.5667166416792"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0p2-DI-wAB"/>
-        <segue reference="efR-Fw-Qq2"/>
         <segue reference="xU6-8T-6oy"/>
-        <segue reference="TTf-7s-XMh"/>
+        <segue reference="0p2-DI-wAB"/>
         <segue reference="Azt-mv-La0"/>
     </inferredMetricsTieBreakers>
 </document>

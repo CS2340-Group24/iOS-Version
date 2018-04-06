@@ -68,7 +68,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     func presentAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
+            //NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -94,11 +94,11 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                     //let newUser = User(username: username, password: password1, firstName: firstName
                     //    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
                     Model.createUser(username: username, password: password1, firstName: firstName
-                        , lastName: lastName, dateOfBirth: dateOfBirth, gender: self.gender)
+                        , lastName: lastName, dateOfBirth: dateOfBirth, gender: self.gender, userType: UserType.general)
                     
                     let alert = UIAlertController(title: "Registration Successful", message: "", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                        NSLog("The \"OK\" alert occured.")
+                        //NSLog("The \"OK\" alert occured.")
                         let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
                         self.present(next, animated: true, completion: nil)
                     }))

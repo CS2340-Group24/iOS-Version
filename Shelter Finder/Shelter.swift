@@ -24,7 +24,7 @@ class Shelter {
     var currentAvailable: Int
     var reservations: [Reservation]
     
-    init(key: Int, name: String, capacity: String, numericCapacity: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
+    init(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
         self.key = key
         self.name = name
         self.capacity = capacity
@@ -48,7 +48,7 @@ class Shelter {
             distance = Double(round(10 * 3959 * c) / 10)
         }
         
-        currentAvailable = numericCapacity
+        currentAvailable = available
         reservations = []
     }
     

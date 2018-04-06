@@ -33,7 +33,7 @@ class ShelterViewController: UIViewController {
         //addressButton.setTitle(Model.currentShelter!.address, for: .normal)
         addressLabel.text = Model.currentShelter!.address
         phoneLabel.text = Model.currentShelter!.phone
-        capacityLabel.text = "Current capacity: \(Model.currentShelter!.currentAvailable)"
+        capacityLabel.text = "Current available: \(Model.currentShelter!.currentAvailable)"
         var isReserved = false
         if let reservation = Model.user!.reservation {
             if reservation.shelter!.key == Model.currentShelter!.key {
@@ -53,6 +53,13 @@ class ShelterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func presentAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
@@ -66,8 +73,20 @@ class ShelterViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction func editReservations(_ sender: Any) {
+    @IBAction func editReservationPressed(_ sender: UIButton) {
+        if let reservation = Model.user!.reservation {
+            if reservation.shelter!.key == Model.currentShelter!.key {
+                let next = self.storyboard?.instantiateViewController(withIdentifier: "EditReservationView") as! EditReservationViewController
+                next.lastView = EditReservationViewController.SHELTER_VIEW
+                self.present(next, animated: true, completion: nil)
+            } else {
+                presentAlert(title: "Reservation with other shelter already exists", message: "Please remove this reservation before creating a new one")
+            }
+        } else {
+            let next = self.storyboard?.instantiateViewController(withIdentifier: "EditReservationView") as! EditReservationViewController
+            next.lastView = EditReservationViewController.SHELTER_VIEW
+            self.present(next, animated: true, completion: nil)
+        }
     }
-    
 
 }

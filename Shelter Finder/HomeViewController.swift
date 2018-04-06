@@ -36,6 +36,7 @@ class HomeViewController: UIViewController {
                 capacityLabel.text = "Current capacity: \(shelter.currentAvailable)"
                 reservationsLabel.text = "Spots reserved: \(reservation.beds)"
                 editReservationsButton.setTitle("Edit reservations", for: .normal)
+                Model.currentShelter = shelter
             } else {
                 titleLabel.text = "No current reservation"
                 descriptionLabel.text = ""
@@ -54,5 +55,12 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK : Actions
+    
+    @IBAction func editReservationsPressed(_ sender: UIButton) {
+        let next = self.storyboard?.instantiateViewController(withIdentifier: "EditReservationView") as! EditReservationViewController
+        next.lastView = EditReservationViewController.HOME_VIEW
+        self.present(next, animated: true, completion: nil)
+    }
     
 }

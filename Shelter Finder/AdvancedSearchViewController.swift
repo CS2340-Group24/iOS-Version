@@ -19,6 +19,16 @@ class AdvancedSearchViewController: UIViewController {
     @IBOutlet weak var youngAdultSwitch: UISwitch!
     @IBOutlet weak var veteranSwitch: UISwitch!
     
+    static let SHELTER_LIST = 0
+    static let MAP_VIEW = 1
+    var lastView: Int = AdvancedSearchViewController.SHELTER_LIST {
+        didSet {
+            if !(lastView == AdvancedSearchViewController.SHELTER_LIST || lastView == AdvancedSearchViewController.MAP_VIEW) {
+                lastView = AdvancedSearchViewController.SHELTER_LIST
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -69,4 +79,14 @@ class AdvancedSearchViewController: UIViewController {
         SearchCriteria.veterans = sender.isOn
     }
 
+    @IBAction func donePressed(_ sender: UIBarButtonItem) {
+        if lastView == AdvancedSearchViewController.SHELTER_LIST {
+            let next = self.storyboard?.instantiateViewController(withIdentifier: "ShelterListView") as! ShelterListViewController
+            self.present(next, animated: true, completion: nil)
+        } else if lastView == AdvancedSearchViewController.MAP_VIEW {
+            let next = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+            self.present(next, animated: true, completion: nil)
+        }
+    }
+    
 }

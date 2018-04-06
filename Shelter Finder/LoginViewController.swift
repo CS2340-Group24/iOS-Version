@@ -31,7 +31,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func presentAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-            NSLog("The \"OK\" alert occured.")
+            //NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -44,7 +44,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 Model.setUser(user: user, action: { _ in
                     let alert = UIAlertController(title: "Login Successful", message: "", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                        NSLog("The \"OK\" alert occured.")
+                        //NSLog("The \"OK\" alert occured.")
                         let next = self.storyboard?.instantiateViewController(withIdentifier: "HomeView") as! HomeViewController
                         self.present(next, animated: true, completion: nil)
                     }))

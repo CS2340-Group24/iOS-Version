@@ -20,6 +20,7 @@ class ShelterListViewController: UIViewController, UISearchBarDelegate, UITableV
         shelterListTable.dataSource = shelterListTable
         shelterListTable.delegate = self
         searchBar.delegate = self
+        searchBar.text = SearchCriteria.search
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,5 +55,13 @@ class ShelterListViewController: UIViewController, UISearchBarDelegate, UITableV
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK : Actions
+    
+    @IBAction func advancedSearchPressed(_ sender: UIButton) {
+        let next = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedSearchView") as! AdvancedSearchViewController
+        next.lastView = AdvancedSearchViewController.SHELTER_LIST
+        self.present(next, animated: true, completion: nil)
+    }
 
 }

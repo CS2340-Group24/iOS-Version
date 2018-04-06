@@ -30,8 +30,8 @@ class Model {
         DataLoader.findUser(username: username, action: action, other: other)
     }
     
-    static func createUser(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender) {
-        let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
+    static func createUser(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender, userType: UserType) {
+        let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, userType: userType)
         //userList.addUser(user: user)
         DataLoader.saveUser(user: user)
     }
@@ -41,8 +41,8 @@ class Model {
         DataLoader.userLoadReservation(username: user.username, action: action)
     }
     
-    static func addShelter(key: Int, name: String, capacity: String, numericCapacity: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
-        let newShelter = Shelter(key: key, name: name, capacity: capacity, numericCapacity: numericCapacity, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone)
+    static func addShelter(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
+        let newShelter = Shelter(key: key, name: name, capacity: capacity, numericCapacity: numericCapacity, available: available, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone)
         shelters.append(newShelter)
         shelterDictionary[key] = newShelter
     }
@@ -87,10 +87,18 @@ class Model {
         return searchedShelters[index]
     }
     
-    /*static func userAddReservation(reservation: Reservation) {
-        if let thisUser = user {
-            thisUser.reservation = reservation
+    static func reserve(newSpots: Int) {
+        if let reservation = user!.reservation {
+            if newSpots != reservation.beds {
+                if newSpots == 0 {
+                    reservation.shelter!.currentAvailable -= reservation.beds
+                    //reservation.shelter!.reservations.remove
+                    user!.reservation = nil
+                }
+            }
+        } else {
+            
         }
-    }*/
+    }
     
 }

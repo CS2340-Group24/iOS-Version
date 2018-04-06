@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		04FEED0DE1B271164214E35A /* Pods_Shelter_FinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A300D51ECA1D28D8CC485B7 /* Pods_Shelter_FinderUITests.framework */; };
+		4064EDF42076EC1300E2AD58 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064EDF32076EC1300E2AD58 /* UserType.swift */; };
+		4064EDF62076EEA200E2AD58 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064EDF52076EEA200E2AD58 /* MapViewController.swift */; };
+		4064EDF82076F21B00E2AD58 /* EditReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064EDF72076F21B00E2AD58 /* EditReservationViewController.swift */; };
 		406CBEAA20715D4C00E49B23 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406CBEA920715D4C00E49B23 /* Reservation.swift */; };
 		4081D9D9205B242E00E63A69 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */; };
 		40BA9C1A206AD3E10049FB0B /* ShelterListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BA9C19206AD3E10049FB0B /* ShelterListCell.swift */; };
@@ -57,6 +60,9 @@
 		2013262C5B7C386CF8D73D33 /* Pods-Shelter Finder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shelter Finder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shelter Finder/Pods-Shelter Finder.release.xcconfig"; sourceTree = "<group>"; };
 		28496F38AF4CF9DE74619C6B /* Pods_Shelter_Finder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shelter_Finder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A300D51ECA1D28D8CC485B7 /* Pods_Shelter_FinderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shelter_FinderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4064EDF32076EC1300E2AD58 /* UserType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		4064EDF52076EEA200E2AD58 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		4064EDF72076F21B00E2AD58 /* EditReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditReservationViewController.swift; sourceTree = "<group>"; };
 		406CBEA920715D4C00E49B23 /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		4081D9D8205B242E00E63A69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40BA9C19206AD3E10049FB0B /* ShelterListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShelterListCell.swift; sourceTree = "<group>"; };
@@ -154,11 +160,13 @@
 				40DADCC1203A2E5E002C8E4D /* Assets.xcassets */,
 				40F6C90B205309D60003E557 /* DataLoader.swift */,
 				40EF39AD2046296D00D7F860 /* Gender.swift */,
+				40CD4A9C203CBF350017F7AD /* HomeViewController.swift */,
 				40DADCC6203A2E5F002C8E4D /* Info.plist */,
 				40DADCC3203A2E5F002C8E4D /* LaunchScreen.storyboard */,
-				40CD4A9C203CBF350017F7AD /* HomeViewController.swift */,
 				40CD4A9A203CBCD90017F7AD /* LoginViewController.swift */,
 				40DADCBE203A2E5E002C8E4D /* Main.storyboard */,
+				4064EDF72076F21B00E2AD58 /* EditReservationViewController.swift */,
+				4064EDF52076EEA200E2AD58 /* MapViewController.swift */,
 				40F6C909205309A30003E557 /* Model.swift */,
 				40EF39A92046227900D7F860 /* RegisterViewController.swift */,
 				406CBEA920715D4C00E49B23 /* Reservation.swift */,
@@ -171,6 +179,7 @@
 				40DADCBC203A2E5E002C8E4D /* StartupViewController.swift */,
 				40EF39AB2046256100D7F860 /* User.swift */,
 				40EF39AF2046372F00D7F860 /* UserList.swift */,
+				4064EDF32076EC1300E2AD58 /* UserType.swift */,
 			);
 			path = "Shelter Finder";
 			sourceTree = "<group>";
@@ -501,7 +510,9 @@
 				40F6C90C205309D60003E557 /* DataLoader.swift in Sources */,
 				40BA9C1C206AD5E90049FB0B /* ShelterListTable.swift in Sources */,
 				406CBEAA20715D4C00E49B23 /* Reservation.swift in Sources */,
+				4064EDF62076EEA200E2AD58 /* MapViewController.swift in Sources */,
 				40CD4A9B203CBCD90017F7AD /* LoginViewController.swift in Sources */,
+				4064EDF82076F21B00E2AD58 /* EditReservationViewController.swift in Sources */,
 				40EF39AA2046227900D7F860 /* RegisterViewController.swift in Sources */,
 				40BA9C1A206AD3E10049FB0B /* ShelterListCell.swift in Sources */,
 				40EF39AC2046256100D7F860 /* User.swift in Sources */,
@@ -512,6 +523,7 @@
 				40EF39B02046372F00D7F860 /* UserList.swift in Sources */,
 				40BA9C1E206AD7300049FB0B /* ShelterListViewController.swift in Sources */,
 				40F6C90A205309A30003E557 /* Model.swift in Sources */,
+				4064EDF42076EC1300E2AD58 /* UserType.swift in Sources */,
 				40DADCBB203A2E5E002C8E4D /* AppDelegate.swift in Sources */,
 				40CD4A9D203CBF350017F7AD /* HomeViewController.swift in Sources */,
 				40E5B0CA204DFAF800362506 /* Shelter.swift in Sources */,

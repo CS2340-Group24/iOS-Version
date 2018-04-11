@@ -11,6 +11,7 @@ import FirebaseDatabase
 
 class Model {
     
+    static var nextEmptyReservation: Int = 1
     static var location: [Double]? = [33.774875, -84.397222]
     private(set) static var user: User?
     static var shelters: [Shelter] = []
@@ -21,6 +22,9 @@ class Model {
     static func configure() {
         DataLoader.start()
         DataLoader.loadShelters()
+        DataLoader.getNextEmptyReservation(previousEmpty: -1, action: { (nextEmpty) in
+            nextEmptyReservation = nextEmpty
+        })
     }
     
     /**
@@ -38,11 +42,11 @@ class Model {
     
     static func setUser(user: User, action: @escaping () -> Void) {
         self.user = user
-        DataLoader.userLoadReservation(username: user.username, action: action)
+        DataLoader.userLoadReservation(user: user, action: action)
     }
     
-    static func addShelter(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
-        let newShelter = Shelter(key: key, name: name, capacity: capacity, numericCapacity: numericCapacity, available: available, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone)
+    static func addShelter(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String, nextEmptyReservation: Int) {
+        let newShelter = Shelter(key: key, name: name, capacity: capacity, numericCapacity: numericCapacity, available: available, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone, nextEmptyReservation: nextEmptyReservation)
         shelters.append(newShelter)
         shelterDictionary[key] = newShelter
     }
@@ -91,14 +95,50 @@ class Model {
         if let reservation = user!.reservation {
             if newSpots != reservation.beds {
                 if newSpots == 0 {
-                    reservation.shelter!.currentAvailable -= reservation.beds
-                    //reservation.shelter!.reservations.remove
-                    user!.reservation = nil
+                    // Deletes reservation
+                    deleteReservation(reservation: reservation)
+                } else if newSpots != reservation.beds {
+                    // Modifies reservation
+                    modifyReservation(reservation: reservation, newSpots: newSpots)
                 }
             }
         } else {
-            
+            // Creates reservation
+            createReservation(user: user!, shelter: currentShelter!, beds: newSpots)
         }
+    }
+    
+    static func createReservation(user: User, shelter: Shelter, beds: Int) {
+        let reservation = Reservation(reservationIndex: nextEmptyReservation, user: user, shelter: shelter, beds: beds)
+        shelter.currentAvailable -= beds
+        DataLoader.createReservation(reservation: reservation)
+        DataLoader.getNextEmptyReservation(previousEmpty: nextEmptyReservation + 1, action: {(nextEmpty) in
+            nextEmptyReservation = nextEmpty
+            DataLoader.setNextEmptyReservation(nextEmptyReservation: nextEmptyReservation)
+        })
+    }
+    
+    static func deleteReservation(reservation: Reservation) {
+        reservation.user.reservation = nil
+        if reservation.shelterIndex < reservation.shelter.nextEmptyReservation {
+            reservation.shelter.nextEmptyReservation = reservation.shelterIndex
+        }
+        reservation.shelter.currentAvailable += reservation.beds
+        if reservation.reservationIndex < nextEmptyReservation {
+            nextEmptyReservation = reservation.reservationIndex
+        }
+        DataLoader.deleteReservation(reservation: reservation)
+        DataLoader.setNextEmptyReservation(nextEmptyReservation: nextEmptyReservation)
+    }
+    
+    static func modifyReservation(reservation: Reservation, newSpots: Int) {
+        reservation.shelter.currentAvailable += reservation.beds - newSpots
+        reservation.beds = newSpots
+        DataLoader.modifyReservation(reservation: reservation)
+    }
+    
+    static func getNextEmptyReservation(shelter: Shelter, previousEmpty: Int, action: @escaping (Int) -> Void) {
+        DataLoader.getNextEmptyReservation(shelter: shelter, previousEmpty: previousEmpty, action: action)
     }
     
 }

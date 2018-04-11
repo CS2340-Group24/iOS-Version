@@ -81,7 +81,8 @@ class DataLoader {
                 let address = value?["Address"] as? String ?? ""
                 let notes = value?["Special Notes"] as? String ?? ""
                 let phone = value?["Phone Number"] as? String ?? ""
-                Model.addShelter(key: index, name: name, capacity: capacity, numericCapacity: numericCapacity!, available: available!, restrictions: restrictions, longitude: longitude!, latitude: latitude!, address: address, notes: notes, phone: phone)
+                let nextEmptyReservation = Int(value?["Next Empty Reservation"] as? String ?? "")
+                Model.addShelter(key: index, name: name, capacity: capacity, numericCapacity: numericCapacity!, available: available!, restrictions: restrictions, longitude: longitude!, latitude: latitude!, address: address, notes: notes, phone: phone, nextEmptyReservation: nextEmptyReservation!)
                 loadAShelter(index: index + 1)
             }
             // ...
@@ -101,8 +102,8 @@ class DataLoader {
         ref.child("Users").child(user.username).child("Date of Birth").setValue(dateFormatter.string(from: user.dateOfBirth))
     }
     
-    static func userLoadReservation(username: String, action: @escaping () -> Void) {
-        ref.child("Users").child(username).child("Reservation").observeSingleEvent(of: .value, with: { (snapshot) in
+    static func userLoadReservation(user: User, action: @escaping () -> Void) {
+        ref.child("Users").child(user.username).child("Reservation").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value1 = snapshot.value as? String ?? ""
             if let reservationNum = Int(value1) {
@@ -115,10 +116,14 @@ class DataLoader {
                             let beds = Int(bedsString)!
                             
                             let shelterIndex = Int(value?["Shelter"] as? String ?? "")!
+                            let shelter = Model.getShelter(index: shelterIndex)
+                            let reservationShelterIndex = Int(value?["Reservation Shelter Index"] as? String ?? "")!
                             
-                            let username = value?["User"] as? String ?? ""
+                            //let username = value?["User"] as? String ?? ""
                             print("Reading complete")
-                            if let currentUser = Model.user {
+                            
+                            _ = Reservation(reservationIndex: reservationNum, user: user, shelter: shelter, shelterIndex: reservationShelterIndex, beds: beds)
+                            /*if let currentUser = Model.user {
                                 if currentUser.username == username {
                                     if shelterIndex >= 0 && shelterIndex < Model.numberOfShelters() {
                                         _ = Reservation(user: currentUser, shelter: Model.getShelter(index: shelterIndex), beds: beds)
@@ -138,7 +143,7 @@ class DataLoader {
                                     }
                                 }
                                 
-                            }
+                            }*/
                             
                         }
                         action()
@@ -155,93 +160,78 @@ class DataLoader {
         }
     }
     
-    /*static func loadReservations(user: User) {
-        ref.child("Users").child(user.username).child("Reservations").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            let indexString = value?["1"] as? String ?? ""
-            if indexString != "" {
-                let index = Int(indexString)!
-                loadReservation(index: index, userIndex: 1, action: { (reservation, userIndex) in
-                    let newUserIndex = userIndex + 1
-                    let newIndexString = value?["\(newUserIndex)"] as? String ?? ""
-                    if newIndexString != "" {
-                        let newIndex = Int(newIndexString)!
-                    }
-                })
-            }
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }*/
+    static func createReservation(reservation: Reservation) {
+        ref.child("Reservations").child("\(reservation.reservationIndex)").child("Beds").setValue("\(reservation.beds)")
+        ref.child("Reservations").child("\(reservation.reservationIndex)").child("Reservation Shelter Index").setValue("\(reservation.shelterIndex)")
+        ref.child("Reservations").child("\(reservation.reservationIndex)").child("Shelter").setValue("\(reservation.shelter.key)")
+        ref.child("Reservations").child("\(reservation.reservationIndex)").child("User").setValue(reservation.user.username)
+        ref.child("Users").child(reservation.user.username).child("Reservation").setValue("\(reservation.reservationIndex)")
+        ref.child("Shelters").child("\(reservation.shelter.key)").child("Reservations").child("\(reservation.shelterIndex)").setValue("\(reservation.reservationIndex)")
+        ref.child("Shelters").child("\(reservation.shelter.key)").child("Available").setValue("\(reservation.shelter.currentAvailable)")
+    }
     
-    /*static func userLoadReservation(username: String) {
-        ref.child("Users").child(username).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            userLoadAReservation(userValue: value, userIndex: 1)
-        }) { (error) in
-            print(error.localizedDescription)
+    static func modifyReservation(reservation: Reservation) {
+        ref.child("Reservations").child("\(reservation.reservationIndex)").child("Beds").setValue("\(reservation.beds)")
+        //ref.child("Reservations").child("\(reservation.reservationIndex)").child("Shelter").setValue("\(reservation.shelter.key)")
+        //ref.child("Reservations").child("\(reservation.reservationIndex)").child("User").setValue(reservation.user.username)
+        ref.child("Shelters").child("\(reservation.shelter.key)").child("Available").setValue("\(reservation.shelter.currentAvailable)")
+    }
+    
+    static func deleteReservation(reservation: Reservation) {
+        ref.child("Users").child(reservation.user.username).child("Reservation").setValue("-1")
+        ref.child("Shelters").child("\(reservation.shelter.key)").child("Reservations").child("\(reservation.shelterIndex)").setValue("-1")
+        ref.child("Shelters").child("\(reservation.shelter.key)").child("Next Empty Reservation").setValue("\(reservation.shelter.nextEmptyReservation)")
+        ref.child("Shelters").child("\(reservation.shelter.key)").child("Available").setValue("\(reservation.shelter.currentAvailable)")
+        ref.child("Reservations").child("\(reservation.reservationIndex)").setValue("Deleted")
+    }
+    
+    static func setNextEmptyReservation(nextEmptyReservation: Int) {
+        ref.child("Next Empty Reservation").setValue("\(nextEmptyReservation)")
+    }
+    
+    static func getNextEmptyReservation(previousEmpty: Int, action: @escaping (Int) -> Void) {
+        if (previousEmpty == -1) {
+            ref.child("Next Empty Reservation").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? String ?? ""
+                let index = Int(value)
+                if let indeX = index {
+                    action(indeX)
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+                action(-1)
+            }
+        } else {
+            ref.child("Reservations").child("\(previousEmpty)").observeSingleEvent(of: .value, with: { (snapshot) in
+                let value = snapshot.value as? String ?? ""
+                if value == "Deleted" || value == "" {
+                    action(previousEmpty)
+                } else {
+                    getNextEmptyReservation(previousEmpty: previousEmpty + 1, action: action)
+                }
+            }) { (error) in
+                print(error.localizedDescription)
+                action(-1)
+            }
         }
     }
     
-    static func userLoadAReservation(userValue: NSDictionary?, userIndex: Int) {
-        print("Trying \(userIndex)")
-        
-        let reservations = userValue?["Reservations"] as? [String] ?? []
-        if userIndex > 0 && userIndex < reservations.count {
-            let indexString = reservations[userIndex]
-            let index = Int(indexString)!
-            print("Reservation \(index)")
-            
-            ref.child("Reservations").child("\(index)").observeSingleEvent(of: .value, with: { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                
-                let bedsString = value?["Beds"] as? String ?? ""
-                if bedsString != "" {
-                    let beds = Int(bedsString)!
-                    
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "MM/dd/yyyy"
-                    
-                    let start = value?["Start date"] as? String ?? ""
-                    let startDate = dateFormatter.date(from: start)!
-                    
-                    let end = value?["End date"] as? String ?? ""
-                    let endDate = dateFormatter.date(from: end)!
-                    
-                    let shelterIndex = Int(value?["Shelter"] as? String ?? "")!
-                    
-                    let username = value?["User"] as? String ?? ""
-                    print("Reading complete")
-                    if let currentUser = Model.user {
-                        if currentUser.username == username {
-                            if shelterIndex >= 0 && shelterIndex < Model.numberOfShelters() {
-                                let reservation = Reservation(user: currentUser, shelter: Model.getShelter(index: shelterIndex), beds: beds, startDate: startDate, endDate: endDate)
-                                print(reservation.shelter!.name)
-                                Model.userAddReservation(reservation: reservation)
-                            } else {
-                                let reservation = Reservation(user: currentUser, shelter: shelterIndex, beds: beds, startDate: startDate, endDate: endDate)
-                                Model.userAddReservation(reservation: reservation)
-                            }
-                        } else {
-                            if shelterIndex >= 0 && shelterIndex < Model.numberOfShelters() {
-                                let reservation = Reservation(user: username, shelter: Model.getShelter(index: shelterIndex), beds: beds, startDate: startDate, endDate: endDate)
-                                Model.userAddReservation(reservation: reservation)
-                            } else {
-                                let reservation = Reservation(user: username, shelter: shelterIndex, beds: beds, startDate: startDate, endDate: endDate)
-                                Model.userAddReservation(reservation: reservation)
-                            }
-                        }
-                        userLoadAReservation(userValue: userValue, userIndex: userIndex + 1)
-                    }
-                    
-                }
-                
-            }) { (error) in
-                print(error.localizedDescription)
+    static func setNextEmptyReservation(nextEmptyReservation: Int, shelter: Shelter) {
+        ref.child("Shelters").child("\(shelter.key)").child("Next Empty Reservation").setValue("\(nextEmptyReservation)")
+    }
+    
+    static func getNextEmptyReservation(shelter: Shelter, previousEmpty: Int, action: @escaping (Int) -> Void) {
+        ref.child("Shelters").child("\(shelter.key)").child("Reservations").child("\(previousEmpty)").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? String ?? ""
+            if value == "-1" || value == "" {
+                action(previousEmpty)
+            } else {
+                getNextEmptyReservation(shelter: shelter, previousEmpty: previousEmpty + 1, action: action)
             }
+        }) { (error) in
+            print(error.localizedDescription)
+            action(-1)
         }
-    }*/
+    }
     
 }

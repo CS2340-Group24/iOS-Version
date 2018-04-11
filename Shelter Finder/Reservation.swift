@@ -9,7 +9,44 @@
 import Foundation
 
 class Reservation {
-    private(set) var user: User?
+
+    private(set) var reservationIndex: Int
+    private(set) var user: User
+    private(set) var shelter: Shelter
+    private(set) var shelterIndex: Int  //The index of the reservation in shelter's reservation list
+    var beds: Int
+
+    /**
+     * Used for loading a reservation
+     */
+    init (reservationIndex: Int, user: User, shelter: Shelter, shelterIndex: Int, beds: Int) {
+        self.reservationIndex = reservationIndex
+        self.user = user
+        self.shelter = shelter
+        self.shelterIndex = shelterIndex
+        self.beds = beds
+        
+        user.reservation = self
+        shelter.loadReservation(reservation: self, index: shelterIndex)
+    }
+    
+    /**
+     * Used for creating a reservation
+     */
+    init (reservationIndex: Int, user: User, shelter: Shelter, beds: Int) {
+        self.reservationIndex = reservationIndex
+        self.user = user
+        self.shelter = shelter
+        self.beds = beds
+        
+        shelterIndex = shelter.nextEmptyReservation
+        
+        user.reservation = self
+        shelter.addReservation(reservation: self)
+        
+    }
+
+    /*private(set) var user: User?
     private(set) var username: String?
     private(set) var shelter: Shelter?
     private(set) var shelterIndex: Int?
@@ -41,6 +78,6 @@ class Reservation {
         self.username = user
         self.shelterIndex = shelter
         self.beds = beds
-    }
+    }*/
     
 }

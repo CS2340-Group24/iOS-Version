@@ -22,9 +22,10 @@ class Shelter {
     var phone: String
     var distance: Double?
     var currentAvailable: Int
-    var reservations: [Reservation]
+    var reservations: [Int: Reservation]
+    var nextEmptyReservation: Int
     
-    init(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String) {
+    init(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String, nextEmptyReservation: Int) {
         self.key = key
         self.name = name
         self.capacity = capacity
@@ -49,11 +50,20 @@ class Shelter {
         }
         
         currentAvailable = available
-        reservations = []
+        self.nextEmptyReservation = nextEmptyReservation
+        reservations = [:]
+    }
+    
+    func loadReservation(reservation: Reservation, index: Int) {
+        reservations[index] = reservation
     }
     
     func addReservation(reservation: Reservation) {
-        reservations.append(reservation)
+        reservations[nextEmptyReservation] = reservation
+        Model.getNextEmptyReservation(shelter: self, previousEmpty: nextEmptyReservation, action: { (nextEmpty) in
+            self.nextEmptyReservation = nextEmpty
+            DataLoader.setNextEmptyReservation(nextEmptyReservation: self.nextEmptyReservation, shelter: self)
+        })
     }
     
 }

@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
         SearchCriteria.reset()
         if let user = Model.user {
             if let reservation = user.reservation {
-                let shelter = reservation.shelter!
+                let shelter = reservation.shelter
                 titleLabel.text = shelter.name
                 descriptionLabel.text = shelter.notes
                 restrictionsLabel.text = shelter.restrictions

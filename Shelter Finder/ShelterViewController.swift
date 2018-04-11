@@ -36,7 +36,7 @@ class ShelterViewController: UIViewController {
         capacityLabel.text = "Current available: \(Model.currentShelter!.currentAvailable)"
         var isReserved = false
         if let reservation = Model.user!.reservation {
-            if reservation.shelter!.key == Model.currentShelter!.key {
+            if reservation.shelter.key == Model.currentShelter!.key {
                 isReserved = true
                 reservationsLabel.text = "Spots reserved: \(reservation.beds)"
                 editReservationsButton.setTitle("Edit reservation", for: .normal)
@@ -75,7 +75,7 @@ class ShelterViewController: UIViewController {
     
     @IBAction func editReservationPressed(_ sender: UIButton) {
         if let reservation = Model.user!.reservation {
-            if reservation.shelter!.key == Model.currentShelter!.key {
+            if reservation.shelter.key == Model.currentShelter!.key {
                 let next = self.storyboard?.instantiateViewController(withIdentifier: "EditReservationView") as! EditReservationViewController
                 next.lastView = EditReservationViewController.SHELTER_VIEW
                 self.present(next, animated: true, completion: nil)

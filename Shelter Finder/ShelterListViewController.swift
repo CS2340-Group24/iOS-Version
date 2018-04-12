@@ -39,7 +39,6 @@ class ShelterListViewController: UIViewController, UISearchBarDelegate, UITableV
     }*/
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        print("Click")
         Model.currentShelter = Model.getSearchedShelter(index: indexPath.row)
         let next = self.storyboard?.instantiateViewController(withIdentifier: "ShelterView") as! ShelterViewController
         self.present(next, animated: true, completion: nil)

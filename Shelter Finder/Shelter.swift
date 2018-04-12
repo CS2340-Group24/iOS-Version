@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import MapKit
 
-class Shelter {
+class Shelter : NSObject, MKAnnotation {
     
     var key: Int
     var name: String
@@ -25,6 +26,10 @@ class Shelter {
     var reservations: [Int: Reservation]
     var nextEmptyReservation: Int
     
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
+    
     init(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String, nextEmptyReservation: Int) {
         self.key = key
         self.name = name
@@ -36,6 +41,9 @@ class Shelter {
         self.notes = notes
         self.phone = phone
         self.numericCapacity = numericCapacity
+        
+        coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        title = name
         
         if let location = Model.location {
             let lat1 = .pi * location[0] / 180

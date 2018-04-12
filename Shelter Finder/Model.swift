@@ -113,7 +113,7 @@ class Model {
         shelter.currentAvailable -= beds
         DataLoader.createReservation(reservation: reservation)
         DataLoader.getNextEmptyReservation(previousEmpty: nextEmptyReservation + 1, action: {(nextEmpty) in
-            nextEmptyReservation = nextEmpty
+            nextEmptyReservation = nextEmpty 
             DataLoader.setNextEmptyReservation(nextEmptyReservation: nextEmptyReservation)
         })
     }

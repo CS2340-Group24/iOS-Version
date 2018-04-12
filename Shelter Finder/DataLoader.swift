@@ -204,7 +204,14 @@ class DataLoader {
         } else {
             ref.child("Reservations").child("\(previousEmpty)").observeSingleEvent(of: .value, with: { (snapshot) in
                 let value = snapshot.value as? String ?? ""
-                if value == "Deleted" || value == "" {
+                let dict = snapshot.value as? NSDictionary
+                let isDict: Bool
+                if let _ = dict {
+                    isDict = true
+                } else {
+                    isDict = false
+                }
+                if value == "Deleted" || !(isDict && value == "") {
                     action(previousEmpty)
                 } else {
                     getNextEmptyReservation(previousEmpty: previousEmpty + 1, action: action)

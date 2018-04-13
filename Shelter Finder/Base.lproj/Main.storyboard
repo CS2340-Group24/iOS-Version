@@ -787,14 +787,14 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
                                     <navigationItem id="rw3-Yv-bO0">
-                                        <barButtonItem key="leftBarButtonItem" title="Home" id="A2v-x1-cwH">
-                                            <connections>
-                                                <segue destination="QBe-W1-Nsr" kind="show" id="0p2-DI-wAB"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Back" id="oqi-C0-FKQ">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="oqi-C0-FKQ">
                                             <connections>
                                                 <segue destination="dk7-7G-oEG" kind="show" id="xU6-8T-6oy"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Home" id="A2v-x1-cwH">
+                                            <connections>
+                                                <segue destination="QBe-W1-Nsr" kind="show" id="0p2-DI-wAB"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1006,8 +1006,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1QF-Id-N8b"/>
-        <segue reference="qnG-3E-7Xx"/>
+        <segue reference="0p2-DI-wAB"/>
+        <segue reference="xU6-8T-6oy"/>
         <segue reference="fWE-Cf-I8e"/>
     </inferredMetricsTieBreakers>
 </document>

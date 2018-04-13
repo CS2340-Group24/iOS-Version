@@ -22,13 +22,17 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.hideKeyboardWhenTappedAround()
+        
         searchBar.delegate = self
         searchBar.text = SearchCriteria.search
         
         let initialLocation = CLLocation(latitude: Model.location![0], longitude: Model.location![1])
         centerMapOnLocation(location: initialLocation)
-        for index in 0...(Model.numberOfSearchedShelters() - 1) {
+        var index = 0
+        while index < Model.numberOfSearchedShelters() {
             mapView.addAnnotation(Model.getSearchedShelter(index: index))
+            index += 1
         }
     }
     
@@ -47,8 +51,10 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         SearchCriteria.search = searchText
         mapView.removeAnnotations(mapView.annotations)
-        for index in 0...(Model.numberOfSearchedShelters() - 1) {
+        var index = 0
+        while index < Model.numberOfSearchedShelters() {
             mapView.addAnnotation(Model.getSearchedShelter(index: index))
+            index += 1
         }
     }
     

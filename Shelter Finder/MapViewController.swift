@@ -18,6 +18,8 @@ class MapViewController: UIViewController, UISearchBarDelegate {
     
     let regionRadius: CLLocationDistance = 20000
     
+    var locationItem: MKMapItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,8 +29,17 @@ class MapViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
         searchBar.text = SearchCriteria.search
         
-        let initialLocation = CLLocation(latitude: Model.location![0], longitude: Model.location![1])
-        centerMapOnLocation(location: initialLocation)
+        if let location = Model.location {
+            let initialLocation = CLLocation(latitude: location[0], longitude: location[1])
+            centerMapOnLocation(location: initialLocation)
+            locationItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: location[0], longitude: location[1])))
+            mapView.showsUserLocation = true
+            //locationItem!.isCurrentLocation = true
+            //mapView.addAnnotation(locationItem!)
+        } else {
+            let initialLocation = CLLocation(latitude: 33.774875, longitude: -84.397222)
+            centerMapOnLocation(location: initialLocation)
+        }
         var index = 0
         while index < Model.numberOfSearchedShelters() {
             mapView.addAnnotation(Model.getSearchedShelter(index: index))

@@ -97,7 +97,7 @@ class SearchCriteria {
             }
         }
         if veterans {
-            if !(restricts.contains("verteran")) {
+            if !(restricts.contains("veteran")) {
                 return false
             }
         }

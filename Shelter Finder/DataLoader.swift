@@ -88,6 +88,7 @@ class DataLoader {
             // ...
         }) { (error) in
             print(error.localizedDescription)
+            Model.wasErrorLoading = true
         }
     }
     

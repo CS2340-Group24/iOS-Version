@@ -646,11 +646,13 @@
                                     <navigationItem id="78P-C8-J08">
                                         <barButtonItem key="leftBarButtonItem" title="Home" id="cJH-yi-bdS">
                                             <connections>
+                                                <action selector="homePressed:" destination="dk7-7G-oEG" id="yjG-Sz-mnc"/>
                                                 <segue destination="QBe-W1-Nsr" kind="show" id="bPu-p5-88D"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="As Map" id="xIL-xH-nnA">
                                             <connections>
+                                                <action selector="mapPressed:" destination="dk7-7G-oEG" id="86d-w8-3ql"/>
                                                 <segue destination="HNU-nB-Ipu" kind="show" id="sX0-Cg-fW7"/>
                                             </connections>
                                         </barButtonItem>
@@ -1006,8 +1008,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0p2-DI-wAB"/>
         <segue reference="xU6-8T-6oy"/>
+        <segue reference="bPu-p5-88D"/>
         <segue reference="fWE-Cf-I8e"/>
     </inferredMetricsTieBreakers>
 </document>

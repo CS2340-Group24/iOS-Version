@@ -11,9 +11,27 @@ import FirebaseDatabase
 
 class Model {
     
+    static var wasErrorLoading = false
+    
     static var nextEmptyReservation: Int = 1
-    static var location: [Double]? = [33.774875, -84.397222]
+    
+    // Latitude, Longitude
+    static var location: [Double]? {//= [33.774875, -84.397222] {
+        didSet {
+            for shelter in shelters {
+                shelter.updateDistance()
+            }
+            updateSearchedSelters()
+            if let action = onLocationUpdate {
+                action()
+            }
+        }
+    }
+    static var onLocationUpdate: (() -> Void)?
+    static let locationManager = LocationManager()
+    
     private(set) static var user: User?
+    
     static var shelters: [Shelter] = []
     static var shelterDictionary: [Int : Shelter] = [:]
     private static var searchedShelters: [Shelter] = []
@@ -25,6 +43,7 @@ class Model {
         DataLoader.getNextEmptyReservation(previousEmpty: -1, action: { (nextEmpty) in
             nextEmptyReservation = nextEmpty
         })
+        locationManager.requestAuthorization()
     }
     
     /**

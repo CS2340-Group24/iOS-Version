@@ -17,10 +17,17 @@ class ShelterListViewController: UIViewController, UISearchBarDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.hideKeyboardWhenTappedAround()
+        
         shelterListTable.dataSource = shelterListTable
         shelterListTable.delegate = self
+        
         searchBar.delegate = self
         searchBar.text = SearchCriteria.search
+        
+        Model.onLocationUpdate = {() in
+            self.shelterListTable.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,9 +65,18 @@ class ShelterListViewController: UIViewController, UISearchBarDelegate, UITableV
     // MARK : Actions
     
     @IBAction func advancedSearchPressed(_ sender: UIButton) {
+        Model.onLocationUpdate = nil
         let next = self.storyboard?.instantiateViewController(withIdentifier: "AdvancedSearchView") as! AdvancedSearchViewController
         next.lastView = AdvancedSearchViewController.SHELTER_LIST
         self.present(next, animated: true, completion: nil)
     }
-
+    
+    @IBAction func homePressed(_ sender: UIBarButtonItem) {
+        Model.onLocationUpdate = nil
+    }
+    
+    @IBAction func mapPressed(_ sender: UIBarButtonItem) {
+        Model.onLocationUpdate = nil
+    }
+    
 }

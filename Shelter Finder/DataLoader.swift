@@ -46,7 +46,16 @@ class DataLoader {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy"
                 let dateOfBirth = dateFormatter.date(from: dob)!
-                let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, userType: userType)
+                let banned: Bool
+                if "True" == (value?["Banned"] as? String ?? "") {
+                    banned = true
+                } else {
+                    banned = false
+                }
+                let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, userType: userType, banned: banned)
+                if !("" == (value?["New Password"] as? String ?? "")) {
+                    user.newPassword = value?["New Password"] as? String ?? ""
+                }
                 
                 action(user)
             } else {
@@ -101,6 +110,19 @@ class DataLoader {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         ref.child("Users").child(user.username).child("Date of Birth").setValue(dateFormatter.string(from: user.dateOfBirth))
+        if let reservation = user.reservation {
+            ref.child("Users").child(user.username).child("Reservation").setValue("\(reservation.reservationIndex)")
+        } else {
+            ref.child("Users").child(user.username).child("Reservation").setValue("-1")
+        }
+        if user.banned {
+            ref.child("Users").child(user.username).child("Banned").setValue("True")
+        } else {
+            ref.child("Users").child(user.username).child("Banned").setValue("False")
+        }
+        if let newPassword = user.newPassword {
+            ref.child("Users").child(user.username).child("New Password").setValue(newPassword)
+        }
     }
     
     static func userLoadReservation(user: User, action: @escaping () -> Void) {

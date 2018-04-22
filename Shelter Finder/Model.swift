@@ -32,6 +32,8 @@ class Model {
     
     private(set) static var user: User?
     
+    private(set) static var failedLogins: [String : Int] = [:]
+    
     static var shelters: [Shelter] = []
     static var shelterDictionary: [Int : Shelter] = [:]
     private static var searchedShelters: [Shelter] = []
@@ -53,8 +55,8 @@ class Model {
         DataLoader.findUser(username: username, action: action, other: other)
     }
     
-    static func createUser(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender, userType: UserType) {
-        let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, userType: userType)
+    static func createUser(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender, userType: UserType, banned: Bool) {
+        let user = User(username: username, password: password, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, userType: userType, banned: banned)
         //userList.addUser(user: user)
         DataLoader.saveUser(user: user)
     }
@@ -62,6 +64,48 @@ class Model {
     static func setUser(user: User, action: @escaping () -> Void) {
         self.user = user
         DataLoader.userLoadReservation(user: user, action: action)
+    }
+    
+    /**
+     * Returns whether username has been banned
+     */
+    static func addFailedLogin(username: String) -> Bool {
+        if let current = failedLogins[username] {
+            failedLogins[username] = current + 1
+            if current + 1 >= 3 {
+                lockUser(username: username)
+                return true
+            }
+            return false
+        } else {
+            failedLogins[username] = 1
+            return false
+        }
+    }
+    
+    static func lockUser(username: String) {
+        findUser(username: username, action: { (user) in
+            user.banned = true
+            DataLoader.saveUser(user: user)
+        }, other: { () in
+            
+        })
+    }
+    
+    static func requestUnlock(username: String, password: String, firstName: String, lastName: String, dateOfBirth: Date, gender: Gender, success: @escaping () -> Void, failure: @escaping () -> Void) {
+        findUser(username: username, action: {(user) in
+            let cal = Calendar(identifier: .gregorian)
+            let sameDay = cal.isDate(dateOfBirth, inSameDayAs: user.dateOfBirth)
+            if user.firstName == firstName && user.lastName == lastName && sameDay && user.gender == gender {
+                user.newPassword = password
+                DataLoader.saveUser(user: user)
+                success()
+            } else {
+                failure()
+            }
+        }, other: {() in
+            failure()
+        })
     }
     
     static func addShelter(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String, nextEmptyReservation: Int) {

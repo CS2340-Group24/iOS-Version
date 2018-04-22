@@ -20,6 +20,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var capacityLabel: UILabel!
     @IBOutlet weak var reservationsLabel: UILabel!
     @IBOutlet weak var editReservationsButton: UIButton!
+    @IBOutlet weak var specialtyBar: UINavigationBar!
+    @IBOutlet weak var usersButton: UIBarButtonItem!
+    @IBOutlet weak var sheltersButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,18 @@ class HomeViewController: UIViewController {
                 reservationsLabel.text = ""
                 editReservationsButton.isHidden = true
             }
+            
+            if user.userType == UserType.general {
+                specialtyBar.isHidden = true
+            } else if user.userType == UserType.admin {
+                specialtyBar.isHidden = false
+                usersButton.title = "Edit Users"
+                sheltersButton.title = "Edit Shelters"
+            } else if user.userType == UserType.shelterEmpoyee {
+                specialtyBar.isHidden = false
+                usersButton.title = "View Reservations"
+                sheltersButton.title = "View My Shelter"
+            }
         }
     }
     
@@ -62,5 +77,22 @@ class HomeViewController: UIViewController {
         next.lastView = EditReservationViewController.HOME_VIEW
         self.present(next, animated: true, completion: nil)
     }
+    
+    @IBAction func usersButtonPressed(_ sender: UIBarButtonItem) {
+        if Model.user!.userType == UserType.admin {
+            
+        } else if Model.user!.userType == UserType.shelterEmpoyee {
+            
+        }
+    }
+    
+    @IBAction func sheltersButtonPressed(_ sender: UIBarButtonItem) {
+        if Model.user!.userType == UserType.admin {
+            
+        } else if Model.user!.userType == UserType.shelterEmpoyee {
+            
+        }
+    }
+    
     
 }

@@ -1,16 +1,17 @@
 //
-//  RegisterViewController.swift
+//  SecurityQuestionsViewController.swift
 //  Shelter Finder
 //
-//  Created by Berchenko, Amiel D on 2/27/18.
+//  Created by Berchenko, Amiel D on 4/22/18.
 //  Copyright © 2018 Berchenko, Amiel D. All rights reserved.
 //
 
 import UIKit
 
-class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class SecurityQuestionsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    // MARK: Properties
+    // MARK : Properties
+    
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField1: UITextField!
     @IBOutlet weak var passwordField2: UITextField!
@@ -19,10 +20,11 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var genderPicker: UIPickerView!
     var gender: Gender = Gender.notSpecified
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Do any additional setup after loading the view.
         self.hideKeyboardWhenTappedAround()
         usernameField.delegate = self
         passwordField1.delegate = self
@@ -33,7 +35,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.genderPicker.delegate = self
         self.genderPicker.dataSource = self
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -73,8 +75,9 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: Actions
-    @IBAction func register(_ sender: UIButton) {
+    // MARK : Actions
+    
+    @IBAction func donePressed(_ sender: UIBarButtonItem) {
         let username = usernameField.text!
         let password1 = passwordField1.text!
         let password2 = passwordField2.text!
@@ -86,50 +89,23 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             presentAlert(title: "Not all fields filled", message: "Please fill out all the fields")
         } else if username.contains("\"") || password1.contains("\"") || firstName.contains("\"") || lastName.contains("\"") {
             presentAlert(title: "Illegal character used", message: "Do not use the character \"")
+        } else if (password1 != password2) {
+            self.presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
         } else {
-            Model.findUser(username: username, action: {user in
-                self.presentAlert(title: "Username already taken", message: "Please choose a different username")
-            }, other: {_ in
-                if password1 == password2 {
-                    //let newUser = User(username: username, password: password1, firstName: firstName
-                    //    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
-                    Model.createUser(username: username, password: password1, firstName: firstName
-                        , lastName: lastName, dateOfBirth: dateOfBirth, gender: self.gender, userType: UserType.general, banned: false)
-                    
-                    let alert = UIAlertController(title: "Registration Successful", message: "", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                        //NSLog("The \"OK\" alert occured.")
-                        let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
-                        self.present(next, animated: true, completion: nil)
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                    
-                } else {
-                    self.presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
-                }
-            })
-        }
-        /*if !Model.contains(username: username) {
-            if password1 == password2 {
-                //let newUser = User(username: username, password: password1, firstName: firstName
-                //    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
-                Model.createUser(username: username, password: password1, firstName: firstName
-                    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
+            Model.requestUnlock(username: username, password: password1, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, success: {() in
                 
-                let alert = UIAlertController(title: "Registration Successful", message: "", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Unlock Request Logged", message: "An administrator will unlock your account shortly", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
+                    //NSLog("The \"OK\" alert occured.")
                     let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
                     self.present(next, animated: true, completion: nil)
                 }))
                 self.present(alert, animated: true, completion: nil)
-                
-            } else {
-                presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
-            }
-        } else {
-            presentAlert(title: "Username already taken", message: "Please choose a different username")
-        }*/
+
+            }, failure: {() in
+                self.presentAlert(title: "Incorrect data", message: "Please use correct data")
+            })
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -148,5 +124,5 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         return true
     }
-    
+
 }

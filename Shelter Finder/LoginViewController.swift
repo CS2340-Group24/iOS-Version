@@ -36,26 +36,47 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func presentAlertWithRequest(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            //NSLog("The \"OK\" alert occured.")
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Request Access", comment: "Request Access"), style: .`default`, handler: { _ in
+            let next = self.storyboard?.instantiateViewController(withIdentifier: "SecurityQuestionsView") as! SecurityQuestionsViewController
+            self.present(next, animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: Actions
     @IBAction func login(_ sender: UIButton) {
         let username: String = usernameTextField.text!
-        Model.findUser(username: username, action: {user in
-            if self.passwordTextField.text == user.password {
-                Model.setUser(user: user, action: { _ in
-                    let alert = UIAlertController(title: "Login Successful", message: "", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                        //NSLog("The \"OK\" alert occured.")
-                        let next = self.storyboard?.instantiateViewController(withIdentifier: "HomeView") as! HomeViewController
-                        self.present(next, animated: true, completion: nil)
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                })
-            } else {
+        let locked = Model.addFailedLogin(username: username)
+        if locked {
+            self.presentAlertWithRequest(title: "Too many incorrect login attempts", message: "Account has been locked.")
+        } else {
+            Model.findUser(username: username, action: {user in
+                if user.banned {
+                    self.presentAlertWithRequest(title: "This account is locked", message: "")
+                } else {
+                    if self.passwordTextField.text == user.password {
+                        Model.setUser(user: user, action: { _ in
+                            let alert = UIAlertController(title: "Login Successful", message: "", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                                //NSLog("The \"OK\" alert occured.")
+                                let next = self.storyboard?.instantiateViewController(withIdentifier: "HomeView") as! HomeViewController
+                                self.present(next, animated: true, completion: nil)
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        })
+                    } else {
+                        self.presentAlert(title: "Incorrect username or password", message: "")
+                    }
+                }
+            }, other: {_ in
                 self.presentAlert(title: "Incorrect username or password", message: "")
-            }
-        }, other: {_ in
-            self.presentAlert(title: "Incorrect username or password", message: "")
-        })
+            })
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

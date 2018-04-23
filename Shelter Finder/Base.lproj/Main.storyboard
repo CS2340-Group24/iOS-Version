@@ -951,12 +951,123 @@
                     <view key="view" contentMode="scaleToFill" id="Zco-oU-Ivh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VWZ-TV-ztX">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Users" id="yYq-AK-JUX">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="4j3-OO-tY4">
+                                            <connections>
+                                                <segue destination="QBe-W1-Nsr" kind="show" id="hkP-VE-ta5"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IgK-Cm-8la">
+                                <rect key="frame" x="16" y="65" width="343" height="602"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AdminUsersCell" rowHeight="73" id="r61-T9-adr" customClass="AdminUsersCell" customModule="Shelter_Finder" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="73"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r61-T9-adr" id="zvj-OF-ymm">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="73"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJN-2N-0ha">
+                                                    <rect key="frame" x="8" y="8" width="192" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Type" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lb9-3w-Vud">
+                                                    <rect key="frame" x="200" y="8" width="135" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="135" id="gQ3-gG-tDi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banned" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIG-wX-ZRz">
+                                                    <rect key="frame" x="8" y="39" width="327" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UJN-2N-0ha" firstAttribute="top" secondItem="zvj-OF-ymm" secondAttribute="topMargin" id="4if-TJ-hMK"/>
+                                                <constraint firstItem="IIG-wX-ZRz" firstAttribute="trailing" secondItem="zvj-OF-ymm" secondAttribute="trailingMargin" id="AkN-Dv-qhX"/>
+                                                <constraint firstItem="lb9-3w-Vud" firstAttribute="top" secondItem="zvj-OF-ymm" secondAttribute="topMargin" id="I8E-hL-pYY"/>
+                                                <constraint firstItem="lb9-3w-Vud" firstAttribute="trailing" secondItem="zvj-OF-ymm" secondAttribute="trailingMargin" id="N7k-F7-raA"/>
+                                                <constraint firstItem="lb9-3w-Vud" firstAttribute="leading" secondItem="UJN-2N-0ha" secondAttribute="trailing" id="UJl-CO-fua"/>
+                                                <constraint firstItem="IIG-wX-ZRz" firstAttribute="leading" secondItem="zvj-OF-ymm" secondAttribute="leadingMargin" id="aBX-iI-ukD"/>
+                                                <constraint firstItem="IIG-wX-ZRz" firstAttribute="top" secondItem="lb9-3w-Vud" secondAttribute="bottom" constant="10" id="vwz-oN-PQk"/>
+                                                <constraint firstItem="UJN-2N-0ha" firstAttribute="leading" secondItem="zvj-OF-ymm" secondAttribute="leadingMargin" id="wxY-WI-nFM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="bannedLabel" destination="IIG-wX-ZRz" id="c9L-zP-RM6"/>
+                                            <outlet property="userTypeLabel" destination="lb9-3w-Vud" id="wGB-t4-GN6"/>
+                                            <outlet property="usernameLabel" destination="UJN-2N-0ha" id="F8X-aj-xiv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="VWZ-TV-ztX" secondAttribute="trailing" id="86f-yS-YCO"/>
+                            <constraint firstItem="VWZ-TV-ztX" firstAttribute="top" secondItem="MW2-3z-v7d" secondAttribute="bottom" id="MBs-S3-XuG"/>
+                            <constraint firstItem="IgK-Cm-8la" firstAttribute="leading" secondItem="Zco-oU-Ivh" secondAttribute="leadingMargin" id="Np2-X7-Rd3"/>
+                            <constraint firstItem="mv9-2q-Nge" firstAttribute="top" secondItem="IgK-Cm-8la" secondAttribute="bottom" id="cmm-0t-oDw"/>
+                            <constraint firstItem="IgK-Cm-8la" firstAttribute="trailing" secondItem="Zco-oU-Ivh" secondAttribute="trailingMargin" id="gPw-bC-y2V"/>
+                            <constraint firstItem="IgK-Cm-8la" firstAttribute="top" secondItem="VWZ-TV-ztX" secondAttribute="bottom" constant="1" id="h2r-tP-SB1"/>
+                            <constraint firstItem="VWZ-TV-ztX" firstAttribute="leading" secondItem="Zco-oU-Ivh" secondAttribute="leading" id="tKv-Oz-0jN"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="userListTable" destination="IgK-Cm-8la" id="Zwa-ho-O3y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AZs-H9-4ng" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="788" y="2311"/>
+            <point key="canvasLocation" x="788" y="2310.4947526236883"/>
+        </scene>
+        <!--Admin Detailed User View Controller-->
+        <scene sceneID="UAw-b6-itL">
+            <objects>
+                <viewController storyboardIdentifier="AdminDetailedUserView" id="B4D-sE-MGH" customClass="AdminDetailedUserViewController" customModule="Shelter_Finder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yzT-47-Wt7"/>
+                        <viewControllerLayoutGuide type="bottom" id="6qS-Oi-ERu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tw6-Qo-gaZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oYk-0q-6yu">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="User View" id="CHu-oV-dgL">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="cv6-WY-N8c">
+                                            <connections>
+                                                <segue destination="usD-Iv-eJH" kind="show" id="x55-7o-fEa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8C-VE-b9t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1580" y="2312"/>
         </scene>
         <!--Shelter View Controller-->
         <scene sceneID="cMx-x6-7Hh">
@@ -1195,6 +1306,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="aKd-Dj-w4E"/>
         <segue reference="h6n-M2-yKE"/>
-        <segue reference="bPu-p5-88D"/>
+        <segue reference="hkP-VE-ta5"/>
     </inferredMetricsTieBreakers>
 </document>

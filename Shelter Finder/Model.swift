@@ -30,7 +30,15 @@ class Model {
     static var onLocationUpdate: (() -> Void)?
     static let locationManager = LocationManager()
     
-    private(set) static var user: User?
+    private(set) static var user: User? {
+        didSet {
+            if let theUser = user {
+                if theUser.userType == UserType.admin {
+                    AdminModel.configure()
+                }
+            }
+        }
+    }
     
     private(set) static var failedLogins: [String : Int] = [:]
     

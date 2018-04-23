@@ -80,7 +80,8 @@ class HomeViewController: UIViewController {
     
     @IBAction func usersButtonPressed(_ sender: UIBarButtonItem) {
         if Model.user!.userType == UserType.admin {
-            
+            let next = self.storyboard?.instantiateViewController(withIdentifier: "AdminUsersView") as! AdminUsersViewController
+            self.present(next, animated: true, completion: nil)
         } else if Model.user!.userType == UserType.shelterEmpoyee {
             
         }

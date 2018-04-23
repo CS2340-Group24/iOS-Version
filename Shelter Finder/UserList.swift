@@ -38,6 +38,10 @@ class UserList {
         }
     }
     
+    func getUser(index: Int) -> User {
+        return userList[index]
+    }
+    
     func numUsers() -> Int {
         return userList.count
     }

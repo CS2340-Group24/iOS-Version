@@ -11,7 +11,7 @@ import Foundation
 class User {
     
     private(set) var username: String
-    private(set) var password: String
+    var password: String
     var newPassword: String?
     private(set) var firstName: String
     private(set) var lastName: String

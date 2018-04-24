@@ -33,4 +33,20 @@ class AdminModel {
         return userList.getUser(index: index)
     }
     
+    static func saveUser(user: User) {
+        AdminDataLoader.saveUser(user: user)
+    }
+    
+    static func unlockUser(user: User) {
+        user.password = user.newPassword!
+        user.newPassword = nil
+        user.banned = false
+        saveUser(user: user)
+    }
+    
+    static func lockUser(user: User) {
+        user.banned = true
+        saveUser(user: user)
+    }
+    
 }

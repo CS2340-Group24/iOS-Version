@@ -11,7 +11,7 @@ import Firebase
 
 class AdminDataLoader {
     
-    private static var ref: DatabaseReference!
+    private static var ref: DatabaseReference! = Database.database().reference()
     
     static func start() {
         ref = Database.database().reference()
@@ -69,6 +69,30 @@ class AdminDataLoader {
             
         }) { (error) in
             print(error.localizedDescription)
+        }
+    }
+    
+    /**
+     * The same as saveUser in DataLoader, but doesn't touch the Reservation field
+     */
+    public static func saveUser(user: User) {
+        ref.child("Users").child(user.username).child("Password").setValue(user.password)
+        ref.child("Users").child(user.username).child("First Name").setValue(user.firstName)
+        ref.child("Users").child(user.username).child("Last Name").setValue(user.lastName)
+        ref.child("Users").child(user.username).child("Gender").setValue(user.gender.rawValue)
+        ref.child("Users").child(user.username).child("User Type").setValue(user.userType.rawValue)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        ref.child("Users").child(user.username).child("Date of Birth").setValue(dateFormatter.string(from: user.dateOfBirth))
+        if user.banned {
+            ref.child("Users").child(user.username).child("Banned").setValue("True")
+        } else {
+            ref.child("Users").child(user.username).child("Banned").setValue("False")
+        }
+        if let newPassword = user.newPassword {
+            ref.child("Users").child(user.username).child("New Password").setValue(newPassword)
+        } else {
+            ref.child("Users").child(user.username).child("New Password").setValue("")
         }
     }
     

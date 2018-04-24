@@ -8,10 +8,12 @@
 
 import UIKit
 
-class SecurityQuestionsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class SecurityQuestionsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIScrollViewDelegate {
     
     // MARK : Properties
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var subView: UIView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField1: UITextField!
     @IBOutlet weak var passwordField2: UITextField!
@@ -31,6 +33,8 @@ class SecurityQuestionsViewController: UIViewController, UIPickerViewDelegate, U
         passwordField2.delegate = self
         firstNameField.delegate = self
         lastNameField.delegate = self
+        scrollView.delegate = self
+        
         // Connect data:
         self.genderPicker.delegate = self
         self.genderPicker.dataSource = self
@@ -73,6 +77,12 @@ class SecurityQuestionsViewController: UIViewController, UIPickerViewDelegate, U
             //NSLog("The \"OK\" alert occured.")
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x != 0 {
+            scrollView.contentOffset.x = 0
+        }
     }
     
     // MARK : Actions

@@ -122,6 +122,8 @@ class DataLoader {
         }
         if let newPassword = user.newPassword {
             ref.child("Users").child(user.username).child("New Password").setValue(newPassword)
+        } else {
+            ref.child("Users").child(user.username).child("New Password").setValue("")
         }
     }
     

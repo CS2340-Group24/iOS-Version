@@ -36,6 +36,9 @@ class Model {
                 if theUser.userType == UserType.admin {
                     AdminModel.configure()
                 }
+                if let _ = failedLogins[theUser.username] {
+                    failedLogins[theUser.username] = 0
+                }
             }
         }
     }
@@ -94,7 +97,7 @@ class Model {
     static func lockUser(username: String) {
         findUser(username: username, action: { (user) in
             user.banned = true
-            DataLoader.saveUser(user: user)
+            AdminDataLoader.saveUser(user: user)
         }, other: { () in
             
         })
@@ -106,7 +109,7 @@ class Model {
             let sameDay = cal.isDate(dateOfBirth, inSameDayAs: user.dateOfBirth)
             if user.firstName == firstName && user.lastName == lastName && sameDay && user.gender == gender {
                 user.newPassword = password
-                DataLoader.saveUser(user: user)
+                AdminDataLoader.saveUser(user: user)
                 success()
             } else {
                 failure()

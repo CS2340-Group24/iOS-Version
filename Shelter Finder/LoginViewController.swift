@@ -15,6 +15,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    private var simpleAccount: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -43,6 +45,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Request Unlock", comment: "Request Access"), style: .`default`, handler: { _ in
             let next = self.storyboard?.instantiateViewController(withIdentifier: "SecurityQuestionsView") as! SecurityQuestionsViewController
+            if self.simpleAccount {
+                next.extraDisabled = true
+            }
             self.present(next, animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
@@ -54,6 +59,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         Model.findUser(username: username, action: {user in
             if user.banned {
                 if user.newPassword == nil {
+                    if user.firstName == "" && user.lastName == "" && user.gender == Gender.notSpecified {
+                        self.simpleAccount = true
+                    }
                     self.presentAlertWithRequest(title: "This account is locked", message: "")
                 } else {
                     self.presentAlert(title: "This account is locked", message: "Unlocked request is currently being processed")
@@ -72,6 +80,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     let locked = Model.addFailedLogin(username: username)
                     if locked {
+                        if user.firstName == "" && user.lastName == "" && user.gender == Gender.notSpecified {
+                            self.simpleAccount = true
+                        }
                         self.presentAlertWithRequest(title: "Too many incorrect login attempts", message: "Account has been locked.")
                     } else {
                         self.presentAlert(title: "Incorrect username or password", message: "")

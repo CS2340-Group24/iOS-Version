@@ -119,6 +119,16 @@ class Model {
         })
     }
     
+    static func requestUnlock(username: String, password: String, success: @escaping () -> Void, failure: @escaping () -> Void) {
+        findUser(username: username, action: {(user) in
+            user.newPassword = password
+            AdminDataLoader.saveUser(user: user)
+            success()
+        }, other: {() in
+            failure()
+        })
+    }
+    
     static func addShelter(key: Int, name: String, capacity: String, numericCapacity: Int, available: Int, restrictions: String, longitude: Double, latitude: Double, address: String, notes: String, phone: String, nextEmptyReservation: Int) {
         let newShelter = Shelter(key: key, name: name, capacity: capacity, numericCapacity: numericCapacity, available: available, restrictions: restrictions, longitude: longitude, latitude: latitude, address: address, notes: notes, phone: phone, nextEmptyReservation: nextEmptyReservation)
         shelters.append(newShelter)

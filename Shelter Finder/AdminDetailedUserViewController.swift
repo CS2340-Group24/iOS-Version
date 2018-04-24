@@ -121,7 +121,7 @@ class AdminDetailedUserViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "YES"), style: .`default`, handler: { _ in
             self.lockedLabel.text = "True"
-            self.unlockButton.isHidden = false
+            self.unlockButton.isHidden = true
             self.lockButton.isHidden = true
             AdminModel.lockUser(user: AdminModel.currentUser!)
         }))

@@ -955,8 +955,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="FaT-CN-YbP" id="OhA-kp-HPY"/>
                         <outlet property="datePicker" destination="Xoi-hi-vPu" id="vlg-0J-8Wl"/>
                         <outlet property="firstNameField" destination="bqu-x5-pCl" id="LhY-XY-eph"/>
+                        <outlet property="genderLabel" destination="IHl-yu-vuK" id="BpD-H2-Jm0"/>
                         <outlet property="genderPicker" destination="QqI-wj-P36" id="hpM-cg-gal"/>
                         <outlet property="lastNameField" destination="MiH-dB-3ir" id="zGJ-gU-8u1"/>
                         <outlet property="passwordField1" destination="GAe-3o-fbM" id="6Zh-vr-dxA"/>
@@ -1525,8 +1527,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xU6-8T-6oy"/>
+        <segue reference="aKd-Dj-w4E"/>
         <segue reference="0p2-DI-wAB"/>
-        <segue reference="fbS-KJ-DAC"/>
+        <segue reference="xU6-8T-6oy"/>
     </inferredMetricsTieBreakers>
 </document>

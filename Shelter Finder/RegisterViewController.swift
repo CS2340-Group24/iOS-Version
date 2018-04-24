@@ -18,6 +18,7 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var genderPicker: UIPickerView!
+    
     var gender: Gender = Gender.notSpecified
     
     override func viewDidLoad() {
@@ -109,27 +110,6 @@ class RegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
                 }
             })
         }
-        /*if !Model.contains(username: username) {
-            if password1 == password2 {
-                //let newUser = User(username: username, password: password1, firstName: firstName
-                //    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
-                Model.createUser(username: username, password: password1, firstName: firstName
-                    , lastName: lastName, dateOfBirth: dateOfBirth, gender: gender)
-                
-                let alert = UIAlertController(title: "Registration Successful", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                    NSLog("The \"OK\" alert occured.")
-                    let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
-                    self.present(next, animated: true, completion: nil)
-                }))
-                self.present(alert, animated: true, completion: nil)
-                
-            } else {
-                presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
-            }
-        } else {
-            presentAlert(title: "Username already taken", message: "Please choose a different username")
-        }*/
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

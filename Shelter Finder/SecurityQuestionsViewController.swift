@@ -19,9 +19,12 @@ class SecurityQuestionsViewController: UIViewController, UIPickerViewDelegate, U
     @IBOutlet weak var passwordField2: UITextField!
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var genderPicker: UIPickerView!
     var gender: Gender = Gender.notSpecified
+    var extraDisabled: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,15 @@ class SecurityQuestionsViewController: UIViewController, UIPickerViewDelegate, U
         // Connect data:
         self.genderPicker.delegate = self
         self.genderPicker.dataSource = self
+        
+        if extraDisabled {
+            firstNameField.isHidden = true
+            lastNameField.isHidden = true
+            dateLabel.isHidden = true
+            datePicker.isHidden = true
+            genderLabel.isHidden = true
+            genderPicker.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,26 +107,50 @@ class SecurityQuestionsViewController: UIViewController, UIPickerViewDelegate, U
         let lastName = lastNameField.text!
         let dateOfBirth = datePicker.date
         
-        if username == "" || password1 == "" || password2 == "" || firstName == "" || lastName == "" {
-            presentAlert(title: "Not all fields filled", message: "Please fill out all the fields")
-        } else if username.contains("\"") || password1.contains("\"") || firstName.contains("\"") || lastName.contains("\"") {
-            presentAlert(title: "Illegal character used", message: "Do not use the character \"")
-        } else if (password1 != password2) {
-            self.presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
+        if !extraDisabled {
+            if username == "" || password1 == "" || password2 == "" || firstName == "" || lastName == "" {
+                presentAlert(title: "Not all fields filled", message: "Please fill out all the fields")
+            } else if username.contains("\"") || password1.contains("\"") || firstName.contains("\"") || lastName.contains("\"") {
+                presentAlert(title: "Illegal character used", message: "Do not use the character \"")
+            } else if (password1 != password2) {
+                self.presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
+            } else {
+                Model.requestUnlock(username: username, password: password1, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, success: {() in
+                    
+                    let alert = UIAlertController(title: "Unlock Request Logged", message: "An administrator will unlock your account shortly", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                        //NSLog("The \"OK\" alert occured.")
+                        let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
+                        self.present(next, animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }, failure: {() in
+                    self.presentAlert(title: "Incorrect data", message: "Please use correct data")
+                })
+            }
         } else {
-            Model.requestUnlock(username: username, password: password1, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, gender: gender, success: {() in
-                
-                let alert = UIAlertController(title: "Unlock Request Logged", message: "An administrator will unlock your account shortly", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                    //NSLog("The \"OK\" alert occured.")
-                    let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
-                    self.present(next, animated: true, completion: nil)
-                }))
-                self.present(alert, animated: true, completion: nil)
-
-            }, failure: {() in
-                self.presentAlert(title: "Incorrect data", message: "Please use correct data")
-            })
+            if username == "" || password1 == "" || password2 == "" {
+                presentAlert(title: "Not all fields filled", message: "Please fill out all the fields")
+            } else if username.contains("\"") || password1.contains("\"") {
+                presentAlert(title: "Illegal character used", message: "Do not use the character \"")
+            } else if (password1 != password2) {
+                self.presentAlert(title: "Passwords must be the same", message: "Please retype passwords")
+            } else {
+                Model.requestUnlock(username: username, password: password1, success: {() in
+                    
+                    let alert = UIAlertController(title: "Unlock Request Logged", message: "An administrator will unlock your account shortly", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                        //NSLog("The \"OK\" alert occured.")
+                        let next = self.storyboard?.instantiateViewController(withIdentifier: "StartupView") as! StartupViewController
+                        self.present(next, animated: true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }, failure: {() in
+                    self.presentAlert(title: "Incorrect data", message: "Please use correct data")
+                })
+            }
         }
     }
     
